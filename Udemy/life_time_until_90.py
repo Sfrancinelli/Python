@@ -8,4 +8,4 @@ weeks = time_left * 52
 
 days = time_left * 365
 
-print ("You have " + str(days) + " days, " + str(weeks) + " weeks, and " + str(months) + " months left.")
+print (f"You have {daus} days, {weeks} weeks, and {months} months left.")
