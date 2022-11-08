@@ -105,6 +105,8 @@ end_of_game = False
 
 lives = 6
 
+guessed = False
+
 for letter in chosen_word:
     display.append("_")
 
@@ -118,11 +120,15 @@ while not end_of_game:
         letter = chosen_word[position]
         if guess == letter:
             display[position] = guess
+            guessed = True
     
-    if guess != letter:
+    if guess not in chosen_word:
+        guessed = False
+
+    if not guessed:
         lives -= 1
 
-    print(lives)
+    print(stages[lives])
 
     print(f"{' '.join(display)}")
 
