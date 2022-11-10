@@ -11,16 +11,36 @@ def encrypt(text,shift):
         for i in alphabet:
             if char == i:
                 index = alphabet.index(char)
-                print(f"normal index is {index}")
+                # print(f"normal index is {index}")
                 index += shift
-                print(f"shifted index is {index}")
+                # print(f"shifted index is {index}")
                 if index >= len(alphabet):
                     rest = index - len(alphabet)
                     index = rest
-                    print(f"new index is {index}")
+                    # print(f"new index is {index}")
                 coded = alphabet[index]
                 cipher_text += coded
     print(f"The encoded text is {cipher_text} and the shift number is {shift}")
 
+def decrypt(text,shift):
+    decoded_text = ""
+    for char in text:
+        for i in alphabet:
+            if char == i:
+                index = alphabet.index(char)
+                # print(f"normal index is {index}")
+                index -= shift
+                # print(f"shifted index is {index}")
+                if index < 0:
+                    rest = len(alphabet) + index 
+                    index = rest
+                    # print(f"new index is {index}")
+                decoded = alphabet[index]
+                decoded_text += decoded
+    print(f"The decoded text is {decoded_text} and the shift number is {shift}")
+
+
 if direction == "encode":
     encrypt(text,shift)
+elif direction == "decode":
+    decrypt(text,shift)
