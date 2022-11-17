@@ -27,29 +27,17 @@ function = input("Pick an operation from the lines above: \n")
 
 num2 = int(input("What's the second number?: \n")) 
 
-# for symbol in operations:
-#     if function == symbol and function == "+":
-#         answer = add(num1,num2)
-#     elif function == symbol and function == "-":
-#         answer = substract(num1,num2)
-#     elif function == symbol and function == "*":
-#         answer = multiply(num1,num2)
-#     elif function == symbol and function == "/":
-#         answer = divide(num1,num2)
-
 for symbol in operations:
     if function == symbol:
         answer = operations[symbol](num1,num2)
-
-total = answer
 
 print(f"{num1} {function} {num2} = {answer}")
 
 keep_going = input(f"Type 'y' to continue calculating with {answer}, or type 'n' to exit: \n").lower()
 
-while keep_going == 'y':
+while keep_going == 'y' or keep_going == 'n':
 
-    function = input("Pick another operation: \n")
+    function = input("Pick an operation: \n")
     num3 = int(input("What's the next number?: \n"))
 
     total = answer
@@ -57,6 +45,14 @@ while keep_going == 'y':
     answer = operations[function](total, num3)
 
     print(f"{total} {function} {num3} = {answer}")
-    keep_going = input(f"Type 'y' to continue calculating with {answer}, or type 'n' to exit: \n").lower()
+    keep_going = input(f"Type 'y' to continue calculating with {answer}, or type 'n' to start a new calculation: \n").lower()
+    if keep_going == 'n':
+        asnwer = 0
+        num1 = int(input("What's the first number?: \n"))
+        function = input("Pick an operation: \n")
+        num2 = int(input("What's the second number?: \n")) 
+        answer = operations[function](num1,num2)
+        print(f"{num1} {function} {num2} = {answer}") 
+        keep_going = input(f"Type 'y' to continue calculating with {answer}, or type 'n' to start a new calculation: \n").lower()
 
 print("Goodbye!")
