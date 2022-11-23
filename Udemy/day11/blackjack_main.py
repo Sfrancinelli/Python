@@ -24,7 +24,6 @@ def deal_cards(num,player):
         user.append(cards[random.randint(0,12)])
     elif num == 1 and player == "dealer":
         dealer.append(cards[random.randint(0,12)])
-    has_blackjack()
 
 def keep_score():
     global user_score
@@ -56,8 +55,10 @@ def keep_score():
 def has_blackjack():
     if user == [11,10] or user == [10,11]:
         print("You got a blackjack! You win!")
+        return True
     elif dealer == [11,10] or dealer == [10,11]:
         print("Computer got a blackjack, you lose!")
+        return True
 
 def restart():
     global user
@@ -94,8 +95,18 @@ while reset:
             keep_score()
             if user_score > dealer_score:
                 print("You win!")
+                new_game = input("Would you like to restart the game? Type 'y' to continue playing or 'n' to stop!. \n").lower()
+                if new_game == 'y':
+                    reset = True
+                if new_game == 'n':
+                    reset = False
             elif dealer_score > user_score:
                 print("Dealer wins!")
+                new_game = input("Would you like to restart the game? Type 'y' to continue playing or 'n' to stop!. \n").lower()
+                if new_game == 'y':
+                    reset = True
+                if new_game == 'n':
+                    reset = False
             elif user_score == dealer_score:
                 print("It's a draw! Both players draw a card!")
                 deal_cards(1,"user")
