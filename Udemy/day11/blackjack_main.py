@@ -39,6 +39,7 @@ def keep_score():
                 user_score = sum(user)
             elif 11 not in user:
                 print("You lose!")
+                print(f"Computer's score was: {dealer_score}, and computer's hand was {dealer}")
         dealer_score = sum(dealer)
         if dealer_score > 21 and user_score < 21:
             if 11 in dealer:
@@ -47,11 +48,11 @@ def keep_score():
                 dealer_score = sum(dealer)
                 keep_score()
             elif 11 not in dealer:
-                print("Dealer lose!")
+                print("You won!")
+                print(f"Computer's score was: {dealer_score}, and computer's hand was {dealer}")
         elif dealer_score <= 17:
             deal_cards(1,"dealer")
-            print(f"dealer: {dealer}")
-            print(f"Computer score: {dealer_score}")
+            print("Computer drew a card")
             keep_score()
 
 def has_blackjack():
@@ -62,6 +63,8 @@ def has_blackjack():
     elif dealer == [11,10] or dealer == [10,11]:
         print("Computer got a blackjack, you lose!")
         return True
+    else:
+        return False
 
 def restart():
     """Restarts the console, the scores and the game itself."""
@@ -81,40 +84,45 @@ while reset:
     print(logo)
 
     deal_cards(2,"any")
-    print(f"user: {user}")
-    print(f"dealer: {dealer}")
     keep_score()
-    print(f"User score: {user_score}")
-    print(f"Computer score: {dealer_score}")
+    print(f"Your cards: {user}, current score: {user_score}")
+    print(f"Computer's first card: {dealer[0]}")
 
-    while user_score < 21 and dealer_score < 21:
-        continuar = input("Do you want another card? Type 'y' to continue drawing or 'n' to keep your score. \n").lower()
-        if continuar == 'y':
-            deal_cards(1,"user")
-            print(f"User: {user}")
-            keep_score()
-            print(f"User score: {user_score}")
-            print(f"Computer score: {dealer_score}")
-        if continuar == 'n':
-            keep_score()
-            if user_score > dealer_score:
-                print("You win!")
-            elif dealer_score > user_score:
-                print("Dealer wins!")
-            elif user_score == dealer_score:
-                print("It's a draw! Both players draw a card!")
+    if not has_blackjack():
+
+        while user_score < 21 and dealer_score < 21:
+            continuar = input("Do you want another card? Type 'y' to continue drawing or 'n' to keep your score. \n").lower()
+            if continuar == 'y':
                 deal_cards(1,"user")
-                deal_cards(1,"dealer")
-                print(f"user: {user}")
-                print(f"dealer: {dealer}")
+                print(f"User: {user}")
                 keep_score()
                 print(f"User score: {user_score}")
-                print(f"Computer score: {dealer_score}")
-            break
+                print(f"Computer's first card: {dealer[0]}")
+            if continuar == 'n':
+                keep_score()
+                if user_score > dealer_score:
+                    print("You win!")
+                    print(f"Computer's score was: {dealer_score}, and computer's hand was {dealer}")
+                elif dealer_score > user_score:
+                    print("Computer wins!")
+                    print(f"Computer's score was: {dealer_score}, and computer's hand was {dealer}")
+                elif user_score == dealer_score:
+                    print("It's a draw! Both players draw a card!")
+                    deal_cards(1,"user")
+                    deal_cards(1,"dealer")
+                    print(f"user: {user}")
+                    print(f"dealer: {dealer}")
+                    keep_score()
+                    print(f"User score: {user_score}")
+                    print(f"Computer score: {dealer_score}")
+                break
+
     if user_score == 21 and dealer_score != 21:
         print("You win!")
+        print(f"Computer's score was: {dealer_score}, and computer's hand was {dealer}")
     elif dealer_score == 21 and user_score != 21:
         print("You lose!")
+        print(f"Computer's score was: {dealer_score}, and computer's hand was {dealer}")
 
     new_game = input("Would you like to restart the game? Type 'y' to continue playing or 'n' to stop!. \n").lower()
     if new_game == 'y':
