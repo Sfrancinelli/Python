@@ -16,6 +16,7 @@ dealer_score = 0
 reset = True
 
 def deal_cards(num,player):
+    """Return a random card from the deck and give it to both the player and dealer."""
     if num == 2:
         for i in range(2):
             user.append(cards[random.randint(0,12)])
@@ -26,6 +27,7 @@ def deal_cards(num,player):
         dealer.append(cards[random.randint(0,12)])
 
 def keep_score():
+    """Evaluates the score of the players and defines a winner."""
     global user_score
     global dealer_score
     if not has_blackjack():
@@ -53,6 +55,7 @@ def keep_score():
             keep_score()
 
 def has_blackjack():
+    """Evaluates if any player got a blackjack. Returns true if they've got a blackjack and prints the result."""
     if user == [11,10] or user == [10,11]:
         print("You got a blackjack! You win!")
         return True
@@ -61,6 +64,7 @@ def has_blackjack():
         return True
 
 def restart():
+    """Restarts the console, the scores and the game itself."""
     global user
     global dealer
     global user_score
@@ -95,18 +99,8 @@ while reset:
             keep_score()
             if user_score > dealer_score:
                 print("You win!")
-                new_game = input("Would you like to restart the game? Type 'y' to continue playing or 'n' to stop!. \n").lower()
-                if new_game == 'y':
-                    reset = True
-                if new_game == 'n':
-                    reset = False
             elif dealer_score > user_score:
                 print("Dealer wins!")
-                new_game = input("Would you like to restart the game? Type 'y' to continue playing or 'n' to stop!. \n").lower()
-                if new_game == 'y':
-                    reset = True
-                if new_game == 'n':
-                    reset = False
             elif user_score == dealer_score:
                 print("It's a draw! Both players draw a card!")
                 deal_cards(1,"user")
@@ -116,8 +110,11 @@ while reset:
                 keep_score()
                 print(f"User score: {user_score}")
                 print(f"Computer score: {dealer_score}")
+            break
     if user_score == 21 and dealer_score != 21:
         print("You win!")
+    elif dealer_score == 21 and user_score != 21:
+        print("You lose!")
 
     new_game = input("Would you like to restart the game? Type 'y' to continue playing or 'n' to stop!. \n").lower()
     if new_game == 'y':
