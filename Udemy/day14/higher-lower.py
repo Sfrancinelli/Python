@@ -3,20 +3,18 @@ from game_data import data
 from art import logo, vs
 import random
 
-
+print(logo)
+score = 0
 # Crear una funcion para que me genere numeros random, porque no está funcando
 def game():
     global score 
     global ran_number
     global end_game
     def random_number():
-        number = random.randint(0,50)
+        number = random.randint(0,49)
         return number
 
     ran_number = random_number()
-
-    print(logo)
-    score = 0
 
     value = data[random_number()]
     value2 = data[random_number()] 
@@ -34,7 +32,6 @@ def game():
 
     def result(answer):
         global score
-        score += 1
         global end_game
         if answer == winn:
             score += 1
