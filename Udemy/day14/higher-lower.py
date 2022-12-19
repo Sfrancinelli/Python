@@ -62,6 +62,7 @@ def game():
     print(vs)
     print(f"Against B: {final_string2}")
     answer = input("Who has more followers? Type 'A' or 'B': ").upper()
+    clear()
     end_game = result(answer)
 
     return end_game
