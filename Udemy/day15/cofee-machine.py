@@ -45,38 +45,24 @@ def coffee_machine(input, resources):
     if input == "espresso":
         resources["water"] -= MENU["espresso"]["ingredients"]["water"]
         resources["coffee"] -= MENU["espresso"]["ingredients"]["coffee"]
-        if resources["water"] < 0:
-            return "Sorry there is not enough water."
-        elif resources["coffee"] < 0:
-            return "Sorry there is not enough coffee."
-        elif  resources["milk"] < 0:
-            return "Sorry there is not enough milk."
-        return "Enjoy your espresso!"
     elif input == "capuccino":
         resources["water"] -= MENU["capuccino"]["ingredients"]["water"]
         resources["milk"] -= MENU["capuccino"]["ingredients"]["milk"]
         resources["coffee"] -= MENU["capuccino"]["ingredients"]["coffee"]
-        if resources["water"] < 0:
-            return "Sorry there is not enough water."
-        elif resources["coffee"] < 0:
-            return "Sorry there is not enough coffee."
-        elif  resources["milk"] < 0:
-            return "Sorry there is not enough milk."
-        return "Enjoy your capuccino!"
     elif input == "latte":
         resources["water"] -= MENU["latte"]["ingredients"]["water"]
         resources["milk"] -= MENU["latte"]["ingredients"]["milk"]
         resources["coffee"] -= MENU["latte"]["ingredients"]["coffee"]
-        if resources["water"] < 0:
-            return "Sorry there is not enough water."
-        elif resources["coffee"] < 0:
-            return "Sorry there is not enough coffee."
-        elif  resources["milk"] < 0:
-            return "Sorry there is not enough milk." 
-        return "Enjoy your latte!"     
+    if resources["water"] < 0:
+        return "Sorry there is not enough water."
+    elif resources["coffee"] < 0:
+        return "Sorry there is not enough coffee."
+    elif  resources["milk"] < 0:
+        return "Sorry there is not enough milk." 
+    return f"Enjoy your {input}!"     
 
 
-want = input("What would you like? (espresso/latte/capuccino/report): ")
+want = input("What would you like? (espresso/latte/capuccino/report): ").lower()
 
 coffee = coffee_machine(want, resources)
 print(coffee)
