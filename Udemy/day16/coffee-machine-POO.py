@@ -94,25 +94,30 @@ resources = {
     "coffee": 100,
 }
 
-coffee_machine = Coffee_machine(menu, money, resources)
+def main():
 
-print(coffee_machine)
+    coffee_machine = Coffee_machine(menu, money, resources)
 
-is_on = True
+    print(coffee_machine)
 
-while is_on:
-    choice = input("What would you like? (espresso/latte/cappuccino): ")
-    if choice == "off":
-        print(coffee_machine.off())
-        is_on = False
-    elif choice == "report":
-        coffee_machine.report()
-    else:
-        drink = menu[choice]
-        if coffee_machine.resource_check(drink["ingredients"]):
-            payment = coffee_machine.process_coins()
-            if coffee_machine.is_transaction_successful(payment, drink["cost"]):
-                coffee_machine.make_coffee(choice, drink["ingredients"])
+    is_on = True
+
+    while is_on:
+        choice = input("What would you like? (espresso/latte/cappuccino): ")
+        if choice == "off":
+            print(coffee_machine.off())
+            is_on = False
+        elif choice == "report":
+            coffee_machine.report()
+        else:
+            drink = menu[choice]
+            if coffee_machine.resource_check(drink["ingredients"]):
+                payment = coffee_machine.process_coins()
+                if coffee_machine.is_transaction_successful(payment, drink["cost"]):
+                    coffee_machine.make_coffee(choice, drink["ingredients"])
+
+if __name__ == "__main__":
+    main()
 
 
 
