@@ -107,7 +107,7 @@ def transaction(choice, money):
         return "Missing resources!"
 
 
-want = input("What would you like? (espresso/latte/cappuccino/report/off): ").lower()
+want = input("What would you like? (espresso/latte/cappuccino/report): ").lower()
 
 while want != "off":
     coffee = coffee_machine(want, resources)
