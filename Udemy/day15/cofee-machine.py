@@ -97,9 +97,11 @@ def transaction(choice, money):
         drink_cost = MENU["latte"]["cost"]
     try:
         if money == drink_cost:
+            resources["money"] += money
             return f"Enjoy your {choice}!"
         elif money > drink_cost:
             change = round(money - drink_cost, 2)
+            resources["money"] += drink_cost
             return f"Here is ${change} in change. Enjoy your {choice}!"
         elif money < drink_cost:
             return "Sorry that's not enough money. Money refunded."
