@@ -1,4 +1,4 @@
-class Coffee_machine:
+class CoffeeMachine:
     def __init__(self, menu, money, resources):
         self.menu = menu
         self.money = money
