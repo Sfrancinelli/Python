@@ -43,6 +43,7 @@ QUARTER = 0.25
 
 
 def process_coins():
+    """Asks the user to insert coins and procceses it. Returns the rounded total"""
     print("Please insert coins.")
     total = int(input("how many quarters?: ")) * 0.25
     total += int(input("how many dimes?: ")) * 0.1
@@ -52,6 +53,7 @@ def process_coins():
 
 
 def report(input):
+    """Breaks down the report feature to make it more readable"""
     if input == "report":
         return f"""
         Water: {resources["water"]}
@@ -86,6 +88,7 @@ def coffee_machine(input, resources):
 
 
 def transaction(choice, money):
+    """Gets the choice of the user and the total of coins entered. Returns the change, the product or if missing resources, an alert message."""
     if choice == "espresso":
         drink_cost = MENU["espresso"]["cost"]
     elif choice == "capuccino":
