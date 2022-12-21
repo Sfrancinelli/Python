@@ -92,20 +92,26 @@ def transaction(choice, money):
         drink_cost = MENU["cappuccino"]["cost"]
     elif choice == "latte":
         drink_cost = MENU["latte"]["cost"]
-    if money == drink_cost:
-        return f"Enjoy your {choice}!"
-    elif money > drink_cost:
-        change = round(money - drink_cost, 2)
-        return f"Here is ${change} in change. Enjoy your {choice}!"
-    elif money < drink_cost:
-        return "Sorry that's not enough money. Money refunded."
+    try:
+        if money == drink_cost:
+            return f"Enjoy your {choice}!"
+        elif money > drink_cost:
+            change = round(money - drink_cost, 2)
+            return f"Here is ${change} in change. Enjoy your {choice}!"
+        elif money < drink_cost:
+            return "Sorry that's not enough money. Money refunded."
+    except:
+        return "Missing resources!"
 
 
-want = input("What would you like? (espresso/latte/cappuccino/report): ").lower()
+want = input("What would you like? (espresso/latte/cappuccino/report/off): ").lower()
 
-coffee = coffee_machine(want, resources)
-print(coffee)
-if want != "report":
-    transaccion = transaction(want, coffee)
-    print(transaccion)
+while want != "off":
+    coffee = coffee_machine(want, resources)
+    print(coffee)
+    if want != "report":
+        transaccion = transaction(want, coffee)
+        print(transaccion)
+    want = input("What would you like? (espresso/latte/cappuccino/report/off): ").lower()
+print("Goodbye!")
 
