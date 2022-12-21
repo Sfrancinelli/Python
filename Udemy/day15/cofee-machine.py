@@ -48,8 +48,7 @@ def process_coins():
     total += int(input("how many dimes?: ")) * 0.1
     total += int(input("how many nickles?: ")) * 0.05
     total += int(input("how many pennies?: ")) * 0.01
-    return total
-
+    return round(total, 2)
 
 
 def report(input):
@@ -102,11 +101,11 @@ def transaction(choice, money):
         return "Sorry that's not enough money. Money refunded."
 
 
-
 want = input("What would you like? (espresso/latte/cappuccino/report): ").lower()
 
 coffee = coffee_machine(want, resources)
-transaccion = transaction(want, coffee)
 print(coffee)
-print(transaccion)
+if want != "report":
+    transaccion = transaction(want, coffee)
+    print(transaccion)
 
