@@ -96,7 +96,7 @@ resources = {
 
 def main():
 
-    coffee_machine = Coffee_machine(menu, money, resources)
+    coffee_machine = CoffeeMachine(menu, money, resources)
 
     print(coffee_machine)
 
