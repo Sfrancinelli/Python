@@ -7,3 +7,9 @@ class Question:
     def __init__(self, q_text, q_answer):
         self.text = q_text
         self.answer = q_answer
+
+    def show_text(self):
+        return self.text
+
+    def show_answer(self):
+        return self.answer
