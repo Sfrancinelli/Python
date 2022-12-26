@@ -15,7 +15,6 @@ def main():
 
     while quiz.still_has_questions():
         quiz.next_question()
-        print(quiz.score)
     
 
 if __name__ == "__main__":
