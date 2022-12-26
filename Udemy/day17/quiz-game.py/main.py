@@ -12,7 +12,10 @@ def main():
         question_bank.append(question)
 
     quiz = QuizBrain(question_bank)
-    quiz.next_question()
+
+    while quiz.still_has_questions():
+        quiz.next_question()
+        print(quiz.score)
     
 
 if __name__ == "__main__":
