@@ -10,11 +10,7 @@ class QuizBrain:
         current_question = self.question_list[self.question_number]
         self.question_number += 1
         answer = input(f"Q.{self.question_number}: {current_question.text} (True/False?): ")
-        if answer == current_question.answer:
-            self.score += 1
-            return True
-        else:
-            return False 
+        self.check_answer(answer, current_question.answer)
 
     def still_has_questions(self):
         if self.question_number == len(self.question_list):
@@ -22,20 +18,16 @@ class QuizBrain:
         else:
             return True
 
+    def check_answer(self, user_answer, q_answer):
+        if user_answer.lower() == q_answer.lower():
+            print("You got it right!")
+            self.score += 1
+        else:
+            print("That's wrong!")
+        print(f"The correct answer was: {q_answer}.")
+        print(f"Your current score is: {self.score}/{self.question_number}.")
 
 
-
-    # def next_question(self):
-    #     answer = True
-    #     while answer:
-    #         current_question = self.question_list[self.question_number]
-    #         answer = input(f"Q.{self.question_number}: {current_question.text} (True/False?): ")
-    #         if answer == current_question.answer:
-    #             self.question_number += 1
-    #             answer = True
-    #         else:
-    #             print("Sorry, thats incorrect!")
-    #             answer = False
 
 
             
