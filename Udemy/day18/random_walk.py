@@ -6,6 +6,7 @@ colormode(255)
 
 tim.shape("turtle")
 tim.color("coral")
+tim.speed("fastest")
 
 def random_walk():
     path = randint(0, 2)
@@ -16,11 +17,11 @@ def random_walk():
         tim.left(90)
     elif path == 1:
         tim.right(90)
-    elif path == 3:
-        tim.fd(20)
+    # elif path == 2:
+    #     tim.fd(30)
     
 for _ in range(200):
-    tim.fd(20)
+    tim.fd(30)
     tim.color(randint(0, 255),
               randint(0, 255),
               randint(0, 255))
