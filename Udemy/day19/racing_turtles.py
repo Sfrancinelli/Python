@@ -58,6 +58,6 @@ winner = race()
 if bet.lower() == winner[0].lower():
     print("You win, congratulations!")
 else:
-    print("You lose!")
+    print(f"You lose! The winning turtle was the {winner[0]} turtle!")
 
 screen.exitonclick()
