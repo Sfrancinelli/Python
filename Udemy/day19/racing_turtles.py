@@ -32,10 +32,20 @@ turtles.append(tum)
 
 y = -100
 
+bet = screen.textinput(title="Make your bet", prompt="Which turtle will win the race? Enter a color: ")
+
 def race():
-    for turtle in turtles:
-        while turtle.xcor() < 390:
-            turtle.fd(randint(5, 20))
+    racing = True
+    while racing:
+        for turtle in turtles:
+            if turtle.xcor() < 380:
+                turtle.fd(randint(5, 20))
+                racing = True
+            else:
+                racing = False
+
+            if turtle.xcor() >= 380:
+                return turtle.color()
 
 for turtle in turtles:
     turtle.penup()
@@ -43,6 +53,11 @@ for turtle in turtles:
     turtle.goto(-390, y)
     y += 50
 
-race()
+winner = race()
+
+if bet.lower() == winner[0].lower():
+    print("You win, congratulations!")
+else:
+    print("You lose!")
 
 screen.exitonclick()
