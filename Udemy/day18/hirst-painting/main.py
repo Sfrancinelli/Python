@@ -37,6 +37,7 @@ def dot_line():
     global current_y
 
     tim.penup()
+    tim.hideturtle()
     tim.goto(-225, current_y)
 
     for _ in range(10):
