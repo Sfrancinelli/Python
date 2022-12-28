@@ -29,7 +29,33 @@ tim = Turtle()
 tim.shape("turtle")
 tim.speed("fastest")
 
-tim.fd(10)
+current_y = -225
+
+
+def dot_line():
+
+    global current_y
+
+    tim.penup()
+    tim.goto(-225, current_y)
+
+    for _ in range(10):
+
+        tim.color(choice(color_list))
+        tim.begin_fill()
+        tim.circle(10)
+        tim.end_fill()
+        tim.penup()
+        tim.fd(50)
+        tim.pendown()
+
+    current_y += 50
+    tim.penup()
+    tim.goto(-200, current_y)
+
+
+for _ in range(10):
+    dot_line()
 
 screen = Screen()
 screen = screen.exitonclick()
