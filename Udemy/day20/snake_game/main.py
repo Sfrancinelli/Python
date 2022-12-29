@@ -31,7 +31,6 @@ while game_is_on:
         new_y = segments[seg_num - 1].ycor()
         segments[seg_num].goto(new_x, new_y)
     segments[0].fd(20)
-    segments[0].left(90)
         
         
 
