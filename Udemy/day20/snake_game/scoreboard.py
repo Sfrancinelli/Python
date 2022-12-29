@@ -1,5 +1,9 @@
 from turtle import Turtle, Screen
 
+ALIGNMENT = "center"
+
+FONT = ('Arial', 16, 'normal')
+
 class Scoreboard(Turtle):
 
     def __init__(self):
@@ -19,4 +23,4 @@ class Scoreboard(Turtle):
 
     def show_score(self):
         self.clear()
-        self.write(f"Score: {self.score}", False, align="center", font=('Arial', 14, 'normal'))
+        self.write(f"Score: {self.score}", align=ALIGNMENT, font=FONT)
