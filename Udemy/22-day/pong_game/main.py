@@ -2,6 +2,7 @@ from turtle import Turtle, Screen
 import paddle
 from ball import Ball
 import time
+from scoreboard import Scoreboard
 
 screen = Screen()
 screen.setup(width=800, height=600)
@@ -13,6 +14,8 @@ l_paddle = paddle.Paddle(-350, 0)
 r_paddle = paddle.Paddle(350, 0)
 
 ball = Ball()
+
+score = Scoreboard()
 
 screen.listen()
 
@@ -32,6 +35,7 @@ while game_is_on:
     if ball.ycor() > 280 or ball.ycor() < -280:
         ball.bounce()
     elif ball.xcor() > 385 or ball.xcor() < -385:
+        score.game_over()
         game_is_on = False
 
 screen.exitonclick()
