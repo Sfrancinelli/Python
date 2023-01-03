@@ -32,6 +32,7 @@ while game_is_on:
     screen.update()
     ball.move()
 
+    l_paddle.singleplayer()
 
     # Detext collision with top and bottom
     if ball.ycor() > 280 or ball.ycor() < -280:
@@ -42,11 +43,11 @@ while game_is_on:
     
 
     # Detect collision with r_paddle
-    if ball.distance(r_paddle) <= 50 and ball.xcor() >= 335:
+    if ball.distance(r_paddle) <= 50 and ball.xcor() >= 325:
         ball.bounce_x()
 
     # Detect collision with l_paddle
-    if ball.distance(l_paddle) <= 50 and ball.xcor() <= -335:
+    if ball.distance(l_paddle) <= 50 and ball.xcor() <= -325:
         ball.bounce_x()
 
 

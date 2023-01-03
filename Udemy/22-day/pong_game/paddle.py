@@ -1,5 +1,4 @@
 from turtle import Turtle
-
 class Paddle(Turtle):
     def __init__(self, x_cor, y_cor):
         super().__init__()
@@ -9,13 +8,22 @@ class Paddle(Turtle):
         self.pu()
         self.goto(x_cor, y_cor)
         self.speed("fastest")
+        self.game_is_on = True
 
     def up(self):
-            new_y = self.ycor() + 25
-            self.goto(self.xcor(), new_y)
+        new_y = self.ycor() + 25
+        self.goto(self.xcor(), new_y)
 
     def down(self):
-            new_y = self.ycor() - 25
-            self.goto(self.xcor(), new_y)
+        new_y = self.ycor() - 25
+        self.goto(self.xcor(), new_y)
+
+    def singleplayer(self):
+        self.down()
+        if self.ycor() > 230:
+            self.down()
+        elif self.ycor() < -230:
+            self.up()
+
 
 
