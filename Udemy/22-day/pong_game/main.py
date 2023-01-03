@@ -32,16 +32,31 @@ while game_is_on:
     screen.update()
     ball.move()
 
-    l_paddle.singleplayer()
+    # if ball.ycor() > 0:
+    #     if l_paddle.ycor() < 230:
+    #         l_paddle.up()
+    # elif ball.ycor() < 0:
+    #     if l_paddle.ycor() > -230:
+    #         l_paddle.down()
+
+    if l_paddle.ycor() < ball.ycor():
+        l_paddle.up()
+    elif l_paddle.ycor() > ball.ycor():
+        l_paddle.down()
+
 
     # Detext collision with top and bottom
     if ball.ycor() > 280 or ball.ycor() < -280:
         ball.bounce()
-    elif ball.xcor() > 385 or ball.xcor() < -385:
-        score.game_over()
-        game_is_on = False
     
-
+    # Detect R paddle misses
+    if ball.xcor() > 385:
+        ball.reset_position()
+    
+    # Detect L paddle misses
+    if ball.xcor() < -385:
+        ball.reset_position()
+    
     # Detect collision with r_paddle
     if ball.distance(r_paddle) <= 50 and ball.xcor() >= 325:
         ball.bounce_x()

@@ -18,12 +18,6 @@ class Paddle(Turtle):
         new_y = self.ycor() - 25
         self.goto(self.xcor(), new_y)
 
-    def singleplayer(self):
-        self.down()
-        if self.ycor() > 230:
-            self.down()
-        elif self.ycor() < -230:
-            self.up()
 
 
 
