@@ -1,6 +1,7 @@
 from turtle import Turtle
 
 class Ball(Turtle):
+
     def __init__(self):
         super().__init__()
         self.shape("circle")
@@ -11,20 +12,11 @@ class Ball(Turtle):
         self.speed("fast")
         self.x = self.xcor()
         self.y = self.ycor()
+        self.heading = self.heading()
 
     def move(self):
-            if self.xcor() < 335 or self.xcor > -335:
-                self.fd(10)
-            if self.xcor() >= 335 or self.xcor() <= -335:
-                if self.heading() == 45:
-                    self.setheading(135)
-                    self.fd(10)
-                elif self.heading() == 135:
-                    self.setheading(225)
-                    self.fd(10)
-                elif self.heading() == 225:
-                    self.setheading(315)
-                    self.fd(10)
-                elif self.heading() == 315:
-                    self.setheading(45)
-                    self.fd(10)                
+            new_x = self.xcor() + 10
+            new_y = self.ycor() + 10
+            self.goto(new_x, new_y)  
+            if self.ycor() >= 290 or self.ycor() <= -290:
+                self.right(50)      
