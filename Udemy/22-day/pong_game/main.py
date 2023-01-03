@@ -28,7 +28,7 @@ screen.onkeypress(key="s", fun=l_paddle.down)
 game_is_on = True
 
 while game_is_on:
-    time.sleep(0.05)
+    time.sleep(ball.move_speed)
     screen.update()
     ball.move()
 
@@ -42,10 +42,10 @@ while game_is_on:
 
     # IA OP, Never misses
 
-    # if l_paddle.ycor() < ball.ycor():
-    #     l_paddle.up()
-    # elif l_paddle.ycor() > ball.ycor():
-    #     l_paddle.down()
+    if l_paddle.ycor() < ball.ycor():
+        l_paddle.up()
+    elif l_paddle.ycor() > ball.ycor():
+        l_paddle.down()
 
 
     # Detext collision with top and bottom
@@ -65,10 +65,12 @@ while game_is_on:
     # Detect collision with r_paddle
     if ball.distance(r_paddle) <= 50 and ball.xcor() >= 325:
         ball.bounce_x()
+        # ball.speeeeeeeeeeed()
 
     # Detect collision with l_paddle
     if ball.distance(l_paddle) <= 50 and ball.xcor() <= -325:
         ball.bounce_x()
+        # ball.speeeeeeeeeeed()
 
 
 screen.exitonclick()
