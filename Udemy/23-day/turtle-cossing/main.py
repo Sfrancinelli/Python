@@ -21,4 +21,10 @@ while game_is_on:
     time.sleep(0.1)
     screen.update()
 
+
+    if player.ycor() > 275:
+        scoreboard.level_up()
+        player.next_level()
+
+
 screen.exitonclick()

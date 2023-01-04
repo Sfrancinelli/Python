@@ -28,3 +28,9 @@ class Player(Turtle):
 
         new_y = self.ycor() - MOVE_DISTANCE
         self.goto(self.xcor(), new_y)
+
+    def next_level(self):
+        """Restarts the position of the turtle"""
+
+        self.goto(STARTING_POSITION)
+
