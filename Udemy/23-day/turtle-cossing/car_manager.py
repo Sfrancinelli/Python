@@ -2,8 +2,8 @@ from turtle import Turtle
 from random import randint, choice
 
 COLORS = ["red", "orange", "yellow", "green", "blue", "purple"]
-STARTING_MOVE_DISTANCE = 5
-MOVE_INCREMENT = 10
+STARTING_MOVE_DISTANCE = 3
+MOVE_INCREMENT = 5
 
 
 class CarManager:
@@ -29,8 +29,8 @@ class CarManager:
             car.backward(self.moving_dist)
 
     def level_up(self):
+        self.moving_dist += MOVE_INCREMENT
         for car in self.all_cars:
-            self.moving_dist += MOVE_INCREMENT
-            car.goto(300, randint(-250, 250))
+            car.goto(randint(280, 450), randint(-250, 250))
 
 

@@ -33,12 +33,10 @@ while game_is_on:
         car.level_up()
 
 
-    # for car in car.all_cars:
-    #     if player.distance(car) < 20:
-    #         game_is_on = False
-    #         scoreboard.game_over()
-
-
+    for coche in car.all_cars:
+        if player.distance(coche) < 20:
+            game_is_on = False
+            scoreboard.game_over()
 
 
 screen.exitonclick()
