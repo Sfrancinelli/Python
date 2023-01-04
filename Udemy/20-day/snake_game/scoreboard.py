@@ -44,3 +44,5 @@ class Scoreboard(Turtle):
                     file.write(str(self.high_score))
         self.score = 0
         self.show_score()
+
+file.close()
