@@ -10,6 +10,7 @@ screen.tracer(0)
 screen.title("Turtle Crossing")
 
 player = Player()
+scoreboard = Scoreboard()
 
 screen.listen()
 screen.onkeypress(key="Up", fun=player.up)

@@ -13,6 +13,7 @@ class Player(Turtle):
         self.shape("turtle")
         self.color("black")
         self.pu()
+        self.setheading(90)
         self.goto(STARTING_POSITION)
         self.speed("fast")
 
