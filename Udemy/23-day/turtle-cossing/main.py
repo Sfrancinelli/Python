@@ -37,5 +37,10 @@ while game_is_on:
             car.level_up()
             car.reset_position()
 
+    for car in cars:
+        if player.distance(car) < 20:
+            game_is_on = False
+            scoreboard.game_over()
+
 
 screen.exitonclick()
