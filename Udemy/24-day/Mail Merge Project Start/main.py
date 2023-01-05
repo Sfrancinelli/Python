@@ -24,12 +24,12 @@ letter1.write(letter1_name)
 count = 0
 
 for i in name_list:
-    i.replace("\n", "")
+    j = i.replace("\n", "")
 
     letter_name = f"{txt[0].replace('[name],', name_list[count])} {txt[1]} {txt[2]} {txt[3]} {txt[4]} {txt[5]} {txt[6]}"
 
 
-    letter = open(f"Udemy/24-day/Mail Merge Project Start/Output/ReadyToSend/letter_{i}.txt", "w")
+    letter = open(f"Udemy/24-day/Mail Merge Project Start/Output/ReadyToSend/letter_{j}.txt", "w")
 
     letter.write(letter_name)
 
