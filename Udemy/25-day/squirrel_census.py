@@ -33,4 +33,3 @@ census_data = pandas.DataFrame(data_table)
 print(census_data)
 squirrel_census_data = census_data.to_csv("Udemy/25-day/squirrel_census_data.csv")
 
-
