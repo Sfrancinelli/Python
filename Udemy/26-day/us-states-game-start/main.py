@@ -48,16 +48,17 @@ while game_is_on:
     answer_state = answer_state.title()
     for state in states:
         if answer_state == state:
-            correct = data[data.state == state]
-            x = int(correct.x)
-            y = int(correct.y)
-            correct_guesses.append(answer_state)
-            score+=1
-            write_state(x=x, y=y, state=answer_state)
-            game_is_on = True
+            if answer_state not in correct_guesses:
+                correct = data[data.state == state]
+                x = int(correct.x)
+                y = int(correct.y)
+                correct_guesses.append(answer_state)
+                score+=1
+                write_state(x=x, y=y, state=answer_state)
+                game_is_on = True
 
         if len(correct_guesses) == 50:
-            write_state(x=0, y=0, state="You win!")
+            write_state(x=-10, y=0, state="You win!")
             game_is_on = False
 
 turtle.mainloop()
