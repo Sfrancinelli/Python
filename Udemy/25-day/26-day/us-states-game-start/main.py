@@ -68,6 +68,9 @@ for state in states:
     if state not in correct_guesses:
         states_to_learn.append(state)
 
+# Using list comprehension will be like this (putting 4 lines in one)
+# states_to_learn = [state for state in states if state not in correct_guesses]
+
 # print(states_to_learn)
 
 states_to_learn_dict = {
