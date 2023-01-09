@@ -56,3 +56,39 @@ print(short_names)
 upper_long_names = [name.upper() for name in names if len(name) > 5]
 
 print(upper_long_names)
+
+# List comprehension exercise: Create a new list containing every number in the list
+# Numbers but each number should be squared.
+
+numbers = [1, 1, 2, 3, 5, 8, 13, 21, 34, 55]
+
+squared_numbers = [n ** 2 for n in numbers]
+
+print(squared_numbers)
+
+# Exercise n 2: Create a new list called result. This new list should only
+# contain the even numbers from the list numbers:
+
+numbers = [1, 1, 2, 3, 5, 8, 13, 21, 34, 55]
+
+result = [n for n in numbers if n % 2 == 0]
+
+print(result)
+
+
+# Exercise n 3: Take a look inside file1.txt and file2.txt. They each contain
+# a bunch ofnumbers, each number in a new line.
+# You are going to create a list called "common_nums" which contains the numbers
+# that are common in both files
+
+with open("Udemy/26-day/file1.txt") as file_1:
+    nums_1 = file_1.readlines()
+
+with open("Udemy/26-day/file2.txt") as file_2:
+    nums_2 = file_2.readlines()
+
+nums1 = [int(n) for n in nums_1]
+nums2 = [int(n) for n in nums_2]
+
+common_nums = [n for n in nums1 if n in nums2]
+print(common_nums)
