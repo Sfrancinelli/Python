@@ -46,6 +46,8 @@ score = 0
 while game_is_on:
     answer_state = screen.textinput(title=f"{score}/50 States Guessed", prompt="What's another state's name?")
     answer_state = answer_state.title()
+    if answer_state == "Exit":
+        break
     for state in states:
         if answer_state == state:
             if answer_state not in correct_guesses:
@@ -61,5 +63,22 @@ while game_is_on:
             write_state(x=-10, y=0, state="You win!")
             game_is_on = False
 
-turtle.mainloop()
+states_to_learn = []
+for state in states:
+    if state not in correct_guesses:
+        states_to_learn.append(state)
+
+# print(states_to_learn)
+
+states_to_learn_dict = {
+    "states": states_to_learn
+}
+
+# print(states_to_learn_dict)
+
+
+# Creating a new file containing the missing states
+new_table = pandas.DataFrame(states_to_learn_dict)
+new_table.to_csv("Udemy/26-day/us-states-game-start/states_to_learn.csv")
+
 
