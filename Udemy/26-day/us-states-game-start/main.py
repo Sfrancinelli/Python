@@ -1,7 +1,7 @@
 import turtle
 import pandas
 
-FONT = ("Courier", 20, "normal")
+FONT = ("Courier", 10, "normal")
 
 screen = turtle.Screen()
 screen.title("U.S. States Game")
@@ -34,11 +34,11 @@ data = pandas.read_csv("Udemy/26-day/us-states-game-start/50_states.csv")
 
 states = data["state"]
 
-print(states == "Alabama")
+# print(states == "Alabama")
 
 state = data[data.state == "Alabama"]
-print(state)
-print(state.x)
+# print(state)
+# print(state.x)
 
 correct_guesses = []
 score = 0
@@ -49,14 +49,16 @@ while game_is_on:
     for state in states:
         if answer_state == state:
             correct = data[data.state == state]
-            x = correct.x
-            y = correct.y
+            x = int(correct.x)
+            y = int(correct.y)
             correct_guesses.append(answer_state)
             score+=1
             write_state(x=x, y=y, state=answer_state)
-        else:
-            game_is_on = False
+            game_is_on = True
 
+        if len(correct_guesses) == 50:
+            write_state(x=0, y=0, state="You win!")
+            game_is_on = False
 
 turtle.mainloop()
 
