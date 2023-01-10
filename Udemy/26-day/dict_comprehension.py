@@ -51,3 +51,33 @@ weather_c = {
 weather_f = {day : (temp * 9/5) + 32 for (day, temp) in weather_c.items()}
 
 print(weather_f)
+
+student_dict = {
+    "student" : ["Angela", "James", "Lilly"],
+    "score" : [56, 76, 98]
+}
+
+# Looping through dictionaries:
+for (key, value) in student_dict.items():
+    print(key)
+    print(value)
+
+# Looping and using comprehension in pandas DataFrame
+import pandas
+
+student_data = pandas.DataFrame(student_dict)
+print(student_data)
+
+# Loop through a data frame:
+for (key, value) in student_data.items():
+    print(key)
+    print(value)
+
+# Loop through rows of a data frame:
+for (index, row) in student_data.iterrows():
+    print(index)
+    print("------------")
+    print(row)
+    print("------------")
+    print(row.student)
+    print("------------")
