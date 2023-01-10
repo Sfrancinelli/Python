@@ -27,10 +27,12 @@ for (index, row) in student_data_frame.iterrows():
 
 data = pandas.read_csv("Udemy/26-day/NATO-alphabet-start/nato_phonetic_alphabet.csv")
 
+#TODO 1:
 nato_dict = {row.letter : row.code for (index, row) in data.iterrows()}
 
 print(nato_dict)
 
+#TODO 2:
 user_word = input("Enter your word:\n").upper()
 
 code_input = [nato_dict[letter] for letter in user_word]
