@@ -22,3 +22,17 @@ print(students_scores)
 passed_students = {student:value for (student, value) in students_scores.items() if value >= 60}
 
 print(passed_students)
+
+# Exercise 1: Use dict comprehension to create a dictionary called "result"
+# That takes each word in the fiven sentence and calculates the number of letters
+# in each word.
+
+sentence = "What is the Airspeed Velocity of an Unladen Swallow?"
+
+list_of_words = sentence.split()
+
+result = {word : len(word) for word in list_of_words}
+
+print(result)
+
+# Exercise 2: 
