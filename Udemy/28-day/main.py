@@ -1,5 +1,4 @@
 from tkinter import *
-import time
 import math
 # ---------------------------- CONSTANTS ------------------------------- #
 PINK = "#e2979c"
@@ -11,24 +10,47 @@ WORK_MIN = 25
 SHORT_BREAK_MIN = 5
 LONG_BREAK_MIN = 20
 CHECK_MARK = "✔"
+reps = 0
 
 # ---------------------------- TIMER RESET ------------------------------- # 
 def reset():
-    countdown(-1)
+    countdown(5)
     canvas.itemconfig(timer_text, text="00:00")
 # ---------------------------- TIMER MECHANISM ------------------------------- # 
 def start():
-    countdown(25 * 60)
+    global reps
+    reps += 1
+
+    work_sec = WORK_MIN * 60
+    short_break_sec = SHORT_BREAK_MIN * 60
+    long_break_sec = LONG_BREAK_MIN * 60
+
+
+    if reps % 8 == 0:
+        countdown(long_break_sec)
+        timer_label.config(text="Long Break", fg=RED)
+    elif reps % 2 == 0:
+        countdown(short_break_sec)
+        timer_label.config(text="Short Break", fg=PINK)
+    else:
+        countdown(work_sec)
+        timer_label.config(text="WORK", fg=GREEN)
+
+
 # ---------------------------- COUNTDOWN MECHANISM ------------------------------- # 
 def countdown(count):
 
     count_min = math.floor(count / 60)
 
     count_sec = count % 60
+    if count_sec < 10:
+        count_sec = f"0{count_sec}"
 
     canvas.itemconfig(timer_text, text=f"{count_min}:{count_sec}")
     if count > 0:
-        window.after(1000, countdown, count -1)
+        window.after(1, countdown, count -1)
+    else:
+        start()
        
 # ---------------------------- UI SETUP ------------------------------- #
 window = Tk()
