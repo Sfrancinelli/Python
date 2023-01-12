@@ -13,15 +13,15 @@ password = []
 def generate_pass():
     global password
 
-    for char in range(1, random.randint(0, len(LETTERS) -15)):
+    for char in range(1, random.randint(8, 10)):
         random_char = random.choice(LETTERS)
         password.append(random_char)
 
-    for sym in range(1, random.randint(0, len(SYMBOLS) -3)):
+    for sym in range(1, random.randint(2, 4)):
         random_sym = random.choice(SYMBOLS)
         password.append(random_sym)
 
-    for num in range(1, random.randint(0, len(NUMBERS) -3)):
+    for num in range(1, random.randint(2, 5)):
         random_num = random.choice(NUMBERS)
         password.append(random_num)
 
@@ -99,7 +99,7 @@ web_entry.focus()
 email_entry = Entry(width=53)
 email_entry.grid(column=1, row=2, columnspan=2)
 # Pre populated field
-email_entry.insert(0, "sebastianfrancinelli00@gmail.com") 
+email_entry.insert(0, "sebastian@gmail.com") 
 
 pass_entry = Entry(width=34)
 pass_entry.grid(column=1, row=3, columnspan=1)
