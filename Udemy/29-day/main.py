@@ -1,12 +1,48 @@
 from tkinter import *
 import random
 
+LETTERS = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+NUMBERS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+SYMBOLS = ['!', '#', '$', '%', '&', '(', ')', '*', '+']
+
+password = []
+
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
+
 def generate_pass():
-    pass
+    global password
+
+    for char in range(1, random.randint(0, len(LETTERS) -1)):
+        random_char = random.choice(LETTERS)
+        password.append(random_char)
+
+    for sym in range(1, random.randint(0, len(SYMBOLS) -1)):
+        random_sym = random.choice(SYMBOLS)
+        password.append(random_sym)
+
+    for num in range(1, random.randint(0, len(NUMBERS) -1)):
+        random_num = random.choice(NUMBERS)
+        password.append(random_num)
+
+    random.shuffle(password)
+
+    random_pass = ""
+
+    for char in password:
+        random_pass += char
+
+    pass_entry.insert(END, random_pass)
+
 # ---------------------------- SAVE PASSWORD ------------------------------- #
+
 def add():
-    pass
+    website = web_entry.get()
+    email = email_entry.get()
+    password = pass_entry.get()
+
+    with open("Udemy/29-day/data.txt", "w") as data:
+        data.write(f"{website} | {email} | {password}")
+
 # ---------------------------- UI SETUP ------------------------------- #
 # Root
 window = Tk()
