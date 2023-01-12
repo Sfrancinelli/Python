@@ -13,17 +13,24 @@ password = []
 def generate_pass():
     global password
 
-    for char in range(1, random.randint(8, 10)):
-        random_char = random.choice(LETTERS)
-        password.append(random_char)
+    # With list comprehension:
+    random_char = [password.append(random.choice(LETTERS)) for _ in range(random.randint(8, 10))]
 
-    for sym in range(1, random.randint(2, 4)):
-        random_sym = random.choice(SYMBOLS)
-        password.append(random_sym)
+    random_sym = [password.append(random.choice(SYMBOLS)) for _ in range(random.randint(2, 4))]
 
-    for num in range(1, random.randint(2, 5)):
-        random_num = random.choice(NUMBERS)
-        password.append(random_num)
+    random_num = [password.append(random.choice(NUMBERS)) for _ in range(random.randint(2, 5))]
+
+    # for char in range(random.randint(8, 10)):
+    #     random_char = random.choice(LETTERS)
+    #     password.append(random_char)
+
+    # for sym in range(random.randint(2, 4)):
+    #     random_sym = random.choice(SYMBOLS)
+    #     password.append(random_sym)
+
+    # for num in range(random.randint(2, 5)):
+    #     random_num = random.choice(NUMBERS)
+    #     password.append(random_num)
 
     random.shuffle(password)
 
