@@ -65,6 +65,9 @@ def add():
     with open("Udemy/29-day/data.txt", "a") as data:
         data.write(f"{website} | {email} | {password}\n")
 
+    web_entry.delete(0, END)
+    pass_entry.delete(0, END)
+
 # ---------------------------- UI SETUP ------------------------------- #
 # Root
 window = Tk()
