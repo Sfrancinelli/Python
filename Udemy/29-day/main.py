@@ -33,9 +33,12 @@ pass_label.grid(column=0, row=3)
 # Entrys
 web_entry = Entry(width=53)
 web_entry.grid(column=1, row=1, columnspan=2)
+web_entry.focus()
 
 email_entry = Entry(width=53)
 email_entry.grid(column=1, row=2, columnspan=2)
+# Pre populated field
+email_entry.insert(0, "sebastianfrancinelli00@gmail.com") 
 
 pass_entry = Entry(width=34)
 pass_entry.grid(column=1, row=3, columnspan=1)
