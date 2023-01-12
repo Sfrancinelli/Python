@@ -11,6 +11,7 @@ SHORT_BREAK_MIN = 5
 LONG_BREAK_MIN = 20
 CHECK_MARK = "✔"
 reps = 0
+check_mark_multiplier = 1
 
 # ---------------------------- TIMER RESET ------------------------------- # 
 def reset():
@@ -19,12 +20,12 @@ def reset():
 # ---------------------------- TIMER MECHANISM ------------------------------- # 
 def start():
     global reps
+
     reps += 1
 
     work_sec = WORK_MIN * 60
     short_break_sec = SHORT_BREAK_MIN * 60
     long_break_sec = LONG_BREAK_MIN * 60
-
 
     if reps % 8 == 0:
         countdown(long_break_sec)
@@ -36,9 +37,10 @@ def start():
         countdown(work_sec)
         timer_label.config(text="Work", fg=GREEN)
 
-
 # ---------------------------- COUNTDOWN MECHANISM ------------------------------- # 
 def countdown(count):
+
+    global check_mark_multiplier
 
     count_min = math.floor(count / 60)
 
@@ -51,6 +53,9 @@ def countdown(count):
         window.after(1, countdown, count -1)
     else:
         start()
+        if reps % 2 == 0:
+            check.config(text=f"{CHECK_MARK*check_mark_multiplier}")
+            check_mark_multiplier += 1
        
 # ---------------------------- UI SETUP ------------------------------- #
 window = Tk()
@@ -72,7 +77,7 @@ start_button.grid(column=0, row=2)
 reset_button = Button(text="Reset", command=reset, justify="left")
 reset_button.grid(column=2, row=2)
 
-check = Label(text=CHECK_MARK*3, fg=GREEN, bg=YELLOW)
+check = Label(text="", fg=GREEN, bg=YELLOW)
 check.grid(column=1, row=3)
 
 
