@@ -1,5 +1,6 @@
 from tkinter import *
 import random
+from tkinter.messagebox import askyesno, showwarning
 
 LETTERS = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
 NUMBERS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
@@ -12,15 +13,15 @@ password = []
 def generate_pass():
     global password
 
-    for char in range(1, random.randint(0, len(LETTERS) -1)):
+    for char in range(1, random.randint(0, len(LETTERS) -15)):
         random_char = random.choice(LETTERS)
         password.append(random_char)
 
-    for sym in range(1, random.randint(0, len(SYMBOLS) -1)):
+    for sym in range(1, random.randint(0, len(SYMBOLS) -3)):
         random_sym = random.choice(SYMBOLS)
         password.append(random_sym)
 
-    for num in range(1, random.randint(0, len(NUMBERS) -1)):
+    for num in range(1, random.randint(0, len(NUMBERS) -3)):
         random_num = random.choice(NUMBERS)
         password.append(random_num)
 
@@ -33,15 +34,36 @@ def generate_pass():
 
     pass_entry.insert(END, random_pass)
 
+    password = []
+
 # ---------------------------- SAVE PASSWORD ------------------------------- #
+
+def confirm():
+
+    warning = False
+
+    website = web_entry.get()
+    email = email_entry.get()
+    password = pass_entry.get()
+
+    if password == "" or website == "" or email == "":
+        warning = showwarning(title="Error", message="Please complete all fields!")
+
+    if not warning:
+
+        answer = askyesno(title='Confirmation', message='Are you sure you want to add this info?')
+
+        if answer:
+            add()
+
 
 def add():
     website = web_entry.get()
     email = email_entry.get()
     password = pass_entry.get()
 
-    with open("Udemy/29-day/data.txt", "w") as data:
-        data.write(f"{website} | {email} | {password}")
+    with open("Udemy/29-day/data.txt", "a") as data:
+        data.write(f"{website} | {email} | {password}\n")
 
 # ---------------------------- UI SETUP ------------------------------- #
 # Root
@@ -80,7 +102,7 @@ pass_entry = Entry(width=34)
 pass_entry.grid(column=1, row=3, columnspan=1)
 
 # Buttons
-add_btn = Button(text="Add", command=add, justify="center", width=44)
+add_btn = Button(text="Add", command=confirm, justify="center", width=44)
 add_btn.grid(column=1, row=4, columnspan=2)
 
 generate_btn = Button(text="Generate Password", command=generate_pass)
