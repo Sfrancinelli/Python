@@ -12,12 +12,24 @@ LONG_BREAK_MIN = 20
 CHECK_MARK = "✔"
 reps = 0
 check_mark_multiplier = 1
+timer = None
 
 # ---------------------------- TIMER RESET ------------------------------- # 
+
 def reset():
-    countdown(5)
+
+    global reps
+    global check_mark_multiplier
+
+    window.after_cancel(timer) # It works but it throws this error on VsCode
+    timer_label.config(text="Timer", fg=GREEN)
     canvas.itemconfig(timer_text, text="00:00")
+    check.config(text="")
+    reps = 0
+    check_mark_multiplier = 1
+
 # ---------------------------- TIMER MECHANISM ------------------------------- # 
+
 def start():
     global reps
 
@@ -38,6 +50,7 @@ def start():
         timer_label.config(text="Work", fg=GREEN)
 
 # ---------------------------- COUNTDOWN MECHANISM ------------------------------- # 
+
 def countdown(count):
 
     global check_mark_multiplier
@@ -50,7 +63,8 @@ def countdown(count):
 
     canvas.itemconfig(timer_text, text=f"{count_min}:{count_sec}")
     if count > 0:
-        window.after(1, countdown, count -1)
+        global timer
+        timer = window.after(1, countdown, count -1)
     else:
         start()
         if reps % 2 == 0:
@@ -58,6 +72,7 @@ def countdown(count):
             check_mark_multiplier += 1
        
 # ---------------------------- UI SETUP ------------------------------- #
+
 window = Tk()
 window.title("Pomodoro")
 window.config(padx=100, pady=50, bg=YELLOW)
