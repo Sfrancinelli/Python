@@ -55,6 +55,19 @@ def save():
             website_entry.delete(0, END)
             password_entry.delete(0, END)
 
+
+def search():
+    try: 
+        with open("Udemy/30-day/Password_Manager-2.0/data.json", "r") as data_file:
+            data = json.load(data_file)
+    except FileNotFoundError:
+        messagebox.showerror(title="Error", message=f"No information available yet, please save information and try again!")
+    else:
+        try:
+            messagebox.showinfo(title="Information", message=f"Info saved for {website_entry.get()}:\n Email/Username: {data[website_entry.get()]['email']}. \n Password: {data[website_entry.get()]['password']}")
+        except KeyError:
+            messagebox.showerror(title="Error", message=f"No information available about {website_entry.get()}")
+
 # ---------------------------- UI SETUP ------------------------------- #
 
 window = Tk()
@@ -75,19 +88,21 @@ password_label = Label(text="Password:")
 password_label.grid(row=3, column=0)
 
 #Entries
-website_entry = Entry(width=35)
-website_entry.grid(row=1, column=1, columnspan=2)
+website_entry = Entry(width=32)
+website_entry.grid(row=1, column=1)
 website_entry.focus()
-email_entry = Entry(width=35)
+email_entry = Entry(width=56)
 email_entry.grid(row=2, column=1, columnspan=2)
 email_entry.insert(0, "angela@gmail.com")
-password_entry = Entry(width=21)
+password_entry = Entry(width=32)
 password_entry.grid(row=3, column=1)
 
 # Buttons
-generate_password_button = Button(text="Generate Password", command=generate_password)
+generate_password_button = Button(text="Generate Password", command=generate_password, width=18)
 generate_password_button.grid(row=3, column=2)
-add_button = Button(text="Add", width=36, command=save)
+add_button = Button(text="Add", width=46, command=save)
 add_button.grid(row=4, column=1, columnspan=2)
+search_button = Button(text="Search", command=search, width=18)
+search_button.grid(row=1, column=2)
 
 window.mainloop()
