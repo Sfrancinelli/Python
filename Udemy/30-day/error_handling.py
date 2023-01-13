@@ -33,3 +33,20 @@ else:
 finally:
     print("This will happen no matter what!")
     my_file.close()
+
+# The Raise Keyword will raise an error of your choice! Ej:
+# try:
+#     text = "abc"
+#     print(text + 5)
+# finally:
+#     raise IndexError
+
+
+height = float(input("Height: "))
+weight = int(input("Weight: "))
+
+if height > 3:
+    raise ValueError("Human height should not be over 3 meters!")
+
+bmi = weight/height**2
+print(bmi)
