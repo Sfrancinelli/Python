@@ -61,6 +61,17 @@ def save():
 
     global language_title, current_card, flip_timer
 
+    index_current_card = data.index(current_card)
+
+    print(current_card)
+    print(index_current_card)
+
+    del data[index_current_card]
+
+    words_to_learn = pandas.DataFrame(data)
+
+    words_to_learn = words_to_learn.to_csv("Udemy/31-day/data/words_to_learn.csv", index=False)
+
     window.after_cancel(flip_timer)
     current_card = random.choice(data)
     # Changing title to 'French' and a random new french word
@@ -70,15 +81,7 @@ def save():
     canvas.itemconfig(word_text, text=french_word, fill="black")
     canvas.itemconfig(card_background, image=canvas_img_front)
 
-    words_to_learn = pandas.DataFrame(data)
-
-    words_to_learn = words_to_learn.to_csv("Udemy/31-day/data/words_to_learn.csv", index=False)
-
-    known_word = data.remove(current_card)
-
     flip_timer = window.after(3000, func=flip_card)
-
-    print(known_word)
 
 # ---------------------------- UI INTERFACE ----------------------------
 
