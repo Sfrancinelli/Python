@@ -1,6 +1,5 @@
 from tkinter import *
 import pandas
-import math
 import random
 
 BACKGROUND_COLOR = "#B1DDC6"
@@ -8,16 +7,23 @@ language_title = "French"
 current_card = {}
 
 # ---------------------------- CSV READINFG ----------------------------
+try:
 
-data_frame = pandas.read_csv("Udemy/31-day/data/french_words.csv")
+    data_frame = pandas.read_csv("Udemy/31-day/data/words_to_learn.csv")
+    data = data_frame.to_dict(orient="records")
 
-data = data_frame.to_dict(orient="records")
+except FileNotFoundError:
 
-print(data[0]['French']) # Format to acces french words
+    data_frame = pandas.read_csv("Udemy/31-day/data/french_words.csv")
+    data = data_frame.to_dict(orient="records")
 
-print(data[0]['English'])
+finally:
 
-print(len(data)) # 101
+    print(data[0]['French']) # Format to acces french words
+
+    print(data[0]['English'])
+
+    print(len(data)) # 101
  
 # ---------------------------- Change Word ----------------------------
 
@@ -47,7 +53,33 @@ def flip_card():
     canvas.itemconfig(title_text, text =language_title, fill="white")
     canvas.itemconfig(word_text, text=current_card["English"], fill="white")
     canvas.itemconfig(card_background, image=canvas_img_back)
-            
+
+# ---------------------------- SAVE ----------------------------
+
+def save(): 
+    """Changes the word of the canvas for another random one."""
+
+    global language_title, current_card, flip_timer
+
+    window.after_cancel(flip_timer)
+    current_card = random.choice(data)
+    # Changing title to 'French' and a random new french word
+    language_title = "French"
+    canvas.itemconfig(title_text, text = language_title, fill="black")
+    french_word = current_card["French"]
+    canvas.itemconfig(word_text, text=french_word, fill="black")
+    canvas.itemconfig(card_background, image=canvas_img_front)
+
+    words_to_learn = pandas.DataFrame(data)
+
+    words_to_learn = words_to_learn.to_csv("Udemy/31-day/data/words_to_learn.csv", index=False)
+
+    known_word = data.remove(current_card)
+
+    flip_timer = window.after(3000, func=flip_card)
+
+    print(known_word)
+
 # ---------------------------- UI INTERFACE ----------------------------
 
 # Root
@@ -77,7 +109,7 @@ cross_button = Button(image=cross_image, highlightthickness=0, command=change_wo
 cross_button.grid(row=1, column=0)
 
 tick_image = PhotoImage(file="Udemy/31-day/images/right.png")
-tick_button = Button(image=tick_image, highlightthickness=0, command=change_word)
+tick_button = Button(image=tick_image, highlightthickness=0, command=save)
 tick_button.grid(row=1, column=1)
 
 change_word()
