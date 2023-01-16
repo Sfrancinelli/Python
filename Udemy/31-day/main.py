@@ -19,6 +19,7 @@ except FileNotFoundError:
 
 finally:
 
+# Data gives error but works perfectly, don't know how to fix the error display
     print(data[0]['French']) # Format to acces french words
 
     print(data[0]['English'])
