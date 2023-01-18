@@ -1,6 +1,7 @@
 import requests
 from datetime import datetime
 import smtplib
+import time
 
 MY_LAT = -34.641364 # Your latitude
 MY_LONG = -58.406247 # Your longitude
@@ -32,15 +33,15 @@ def compare_pos():
     else:
         return False
 
-position = compare_pos()
+is_iss_overhead = compare_pos()
 
-print(position)
+print(is_iss_overhead)
 
 # Your position is within +5 or -5 degrees of the ISS position.
 
 print(iss_lat, iss_lng)
 
-def get_sun():
+def is_night():
 
     parameters = {
         "lat": MY_LAT,
@@ -52,28 +53,31 @@ def get_sun():
     response.raise_for_status()
     data = response.json()
 
-    return data
+    sunrise = int(data["results"]["sunrise"].split("T")[1].split(":")[0])
+    sunset = int(data["results"]["sunset"].split("T")[1].split(":")[0])
 
-sun_data = (get_sun())
+    print(sunrise)
 
-sunrise = int(sun_data["results"]["sunrise"].split("T")[1].split(":")[0])
-sunset = int(sun_data["results"]["sunset"].split("T")[1].split(":")[0])
+    print(sunset)
 
-print(sunrise)
-print(sunset)
+    time_now = datetime.now().hour
 
-time_now = datetime.now()
+    if time_now >= sunset or time_now <= sunrise:
+        return True
 
-if time_now.hour > 22 and position:
-    gmail_email = "pruebaprogramacion5773@gmail.com"
-    password_app_g = "jlcbzdoajvkrpsrq"
-    yahoo_email = "pruebaprogramacion99@yahoo.com"
 
-    with smtplib.SMTP("smtp.gmail.com") as connection:
-        connection.starttls()
-        connection.login(user=gmail_email, password=password_app_g)
-        connection.sendmail(from_addr=gmail_email,
-        to_addrs=gmail_email, msg="Subject:Look for the stars!\n\nThe ISS satelite is passing right now above your head! Look up and watch it!")
+while True:
+    time.sleep(60)
+    if is_night() and is_iss_overhead:
+        gmail_email = "pruebaprogramacion5773@gmail.com"
+        password_app_g = "jlcbzdoajvkrpsrq"
+        yahoo_email = "pruebaprogramacion99@yahoo.com"
+
+        with smtplib.SMTP("smtp.gmail.com") as connection:
+            connection.starttls()
+            connection.login(user=gmail_email, password=password_app_g)
+            connection.sendmail(from_addr=gmail_email,
+            to_addrs=gmail_email, msg="Subject:Look for the stars!\n\nThe ISS satelite is passing right now above your head! Look up and watch it!")
 
 #If the ISS is close to my current position
 # and it is currently dark
