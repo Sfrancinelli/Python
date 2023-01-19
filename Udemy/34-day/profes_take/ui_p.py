@@ -1,5 +1,5 @@
 from tkinter import *
-from quiz_brain import QuizBrain
+from quiz_brain_p import QuizBrain
 
 THEME_COLOR = "#375362"
 
@@ -23,10 +23,10 @@ class QuizInterface:
         self.true_img = PhotoImage(file="Udemy/34-day/images/true.png")
         self.false_img = PhotoImage(file="Udemy/34-day/images/false.png")
 
-        self.true_btn = Button(image=self.true_img, highlightthickness=0, command=lambda: self.check(user_answer=True))
+        self.true_btn = Button(image=self.true_img, highlightthickness=0, command=self.true_pressed)
         self.true_btn.grid(row=2, column=0)
 
-        self.false_btn = Button(image=self.false_img, highlightthickness=0, command=lambda: self.check(user_answer=False))
+        self.false_btn = Button(image=self.false_img, highlightthickness=0, command=self.false_pressed)
         self.false_btn.grid(row=2, column=1)
 
         self.get_next_question()
@@ -34,35 +34,33 @@ class QuizInterface:
         self.window.mainloop()
 
     def get_next_question(self):
+        self.canvas.config(bg="white")
         if self.quiz.still_has_questions():
+            self.score.config(text=f"Score: {self.quiz.score}")
             question_text = self.quiz.next_question()
             self.canvas.itemconfig(self.q_text, text=question_text)
         else:
-            self.canvas.itemconfig(self.q_text, text=f"Your final score was {self.quiz.score}!")
+            self.canvas.itemconfig(self.q_text, text="You've reached the of the Quiz!")
             self.true_btn.config(state="disabled")
             self.false_btn.config(state="disabled")
-            self.window.after(2500, self.destroy)
 
-    def destroy(self):
-        self.window.destroy()
 
-    def correct(self):
-        self.get_next_question()
-        self.canvas.config(bg="white")
 
-    def incorrect(self):
-        self.get_next_question()
-        self.canvas.config(bg="white")
+    def true_pressed(self):
+        is_right = self.quiz.check_answer("true")
+        self.give_feedback(is_right)
 
-    def check(self, user_answer):
-        output = self.quiz.check_answer(user_answer)
-        if output:
-            self.score.config(text=f"Score: {self.quiz.score}")
+    def false_pressed(self):
+        is_right = self.quiz.check_answer("false")
+        self.give_feedback(is_right)
+
+    def give_feedback(self, is_right):
+        if is_right:
             self.canvas.config(bg="green")
-            self.window.after(500, func=self.correct)
-        elif not output:
+        else:
             self.canvas.config(bg="red")
-            self.window.after(500, func=self.incorrect)
+        self.window.after(1000, self.get_next_question)
+
 
 
 
