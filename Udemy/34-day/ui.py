@@ -13,8 +13,8 @@ class QuizInterface:
         self.score.grid(column=1, row=0)
 
         self.canvas = Canvas(width=300, height=250, highlightthickness=0)
-        self.q_text = self.canvas.create_text(150, 125, text="question", fill="black", font=("Arial", 20, "italic"))
-        self.canvas.grid(row=1, column=0, columnspan=2)
+        self.q_text = self.canvas.create_text(150, 125, text=f"question", fill=THEME_COLOR, font=("Arial", 20, "italic"))
+        self.canvas.grid(row=1, column=0, columnspan=2, pady=25)
 
         self.true_img = PhotoImage(file="Udemy/34-day/images/true.png")
         self.false_img = PhotoImage(file="Udemy/34-day/images/false.png")
