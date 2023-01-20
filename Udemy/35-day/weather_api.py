@@ -1,6 +1,6 @@
 import requests
+from api_key import API_KEY
 
-API_KEY = "90d599431ee5fdae1b0e7b1600ec1b19"
 parameters = {
     "lat" : -34.641364,
     "lon" : -58.406247,
