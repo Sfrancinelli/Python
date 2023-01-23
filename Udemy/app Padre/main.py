@@ -39,18 +39,94 @@ data = response.json()
 
 info = f"""
 Buen día pa!
+Información General:
 Día: {data['day']['1']['name']}
-Temp. Mín: {data['day']['1']['tempmin']}
-Temp. Máx: {data['day']['1']['tempmax']}
-Alba: {data['day']['1']['sun']['in']}
-Crepúsculo: {data['day']['1']['sun']['out']}
-Vientos: 
-    Velocidad:{data['day']['1']['wind']['speed']}km/h
-Lluvia: {data['day']['1']['rain']}, si es 0, no llueve. Si es 1, llueve.
-Humedad: {data['day']['1']['humidity']}%
-Nubes: {data['day']['1']['clouds']}
-Indice UV: {data['day']['1']['uv_index']}
+Temp. Mín: {data['day']['1']['tempmin']}°C
+Temp. Máx: {data['day']['1']['tempmax']}°C
+Alba: {data['day']['1']['sun']['in']} hs
+Crepúsculo: {data['day']['1']['sun']['out']} hs
+----------------------------------------------------
+Intervalo 1:
+    Hora: {data['day']['1']['hour'][0]['interval']}
+Vientos:
+    Velocidad: {data['day']['1']['hour'][0]['wind']['speed']}km/h
+    Direccion: {data['day']['1']['hour'][0]['wind']['dir']}
+Lluvia: {data['day']['1']['hour'][0]['rain']}. (Si es 0, no llueve. Si es 1, llueve.)
+Humedad: {data['day']['1']['hour'][0]['humidity']}%
+Nubes: {data['day']['1']['hour'][0]['clouds']}
+Indice UV: {data['day']['1']['hour'][0]['uv_index']}
+----------------------------------------------------
+Intervalo 2:
+    Hora: {data['day']['1']['hour'][1]['interval']}
+Vientos:
+    Velocidad: {data['day']['1']['hour'][1]['wind']['speed']}km/h
+    Direccion: {data['day']['1']['hour'][1]['wind']['dir']}
+Lluvia: {data['day']['1']['hour'][1]['rain']}. (Si es 0, no llueve. Si es 1, llueve.)
+Humedad: {data['day']['1']['hour'][1]['humidity']}%
+Nubes: {data['day']['1']['hour'][1]['clouds']}
+Indice UV: {data['day']['1']['hour'][1]['uv_index']}
+----------------------------------------------------
+Intervalo 3:
+    Hora: {data['day']['1']['hour'][2]['interval']}
+Vientos:
+    Velocidad: {data['day']['1']['hour'][2]['wind']['speed']}km/h
+    Direccion: {data['day']['1']['hour'][2]['wind']['dir']}
+Lluvia: {data['day']['1']['hour'][2]['rain']}. (Si es 0, no llueve. Si es 1, llueve.)
+Humedad: {data['day']['1']['hour'][2]['humidity']}%
+Nubes: {data['day']['1']['hour'][2]['clouds']}
+Indice UV: {data['day']['1']['hour'][2]['uv_index']}
+----------------------------------------------------
+Intervalo 4:
+    Hora: {data['day']['1']['hour'][3]['interval']}
+Vientos:
+    Velocidad: {data['day']['1']['hour'][3]['wind']['speed']}km/h
+    Direccion: {data['day']['1']['hour'][3]['wind']['dir']}
+Lluvia: {data['day']['1']['hour'][3]['rain']}. (Si es 0, no llueve. Si es 1, llueve.)
+Humedad: {data['day']['1']['hour'][3]['humidity']}%
+Nubes: {data['day']['1']['hour'][3]['clouds']}
+Indice UV: {data['day']['1']['hour'][3]['uv_index']}
+----------------------------------------------------
+Intervalo 5:
+    Hora: {data['day']['1']['hour'][4]['interval']}
+Vientos:
+    Velocidad: {data['day']['1']['hour'][4]['wind']['speed']}km/h
+    Direccion: {data['day']['1']['hour'][4]['wind']['dir']}
+Lluvia: {data['day']['1']['hour'][4]['rain']}. (Si es 0, no llueve. Si es 1, llueve.)
+Humedad: {data['day']['1']['hour'][4]['humidity']}%
+Nubes: {data['day']['1']['hour'][4]['clouds']}
+Indice UV: {data['day']['1']['hour'][4]['uv_index']}
+----------------------------------------------------
+Intervalo 6:
+    Hora: {data['day']['1']['hour'][5]['interval']}
+Vientos:
+    Velocidad: {data['day']['1']['hour'][5]['wind']['speed']}km/h
+    Direccion: {data['day']['1']['hour'][5]['wind']['dir']}
+Lluvia: {data['day']['1']['hour'][5]['rain']}. (Si es 0, no llueve. Si es 1, llueve.)
+Humedad: {data['day']['1']['hour'][5]['humidity']}%
+Nubes: {data['day']['1']['hour'][5]['clouds']}
+Indice UV: {data['day']['1']['hour'][5]['uv_index']}
+----------------------------------------------------
+Intervalo 7:
+    Hora: {data['day']['1']['hour'][6]['interval']}
+Vientos:
+    Velocidad: {data['day']['1']['hour'][6]['wind']['speed']}km/h
+    Direccion: {data['day']['1']['hour'][6]['wind']['dir']}
+Lluvia: {data['day']['1']['hour'][6]['rain']}. (Si es 0, no llueve. Si es 1, llueve.)
+Humedad: {data['day']['1']['hour'][6]['humidity']}%
+Nubes: {data['day']['1']['hour'][6]['clouds']}
+Indice UV: {data['day']['1']['hour'][6]['uv_index']}
+----------------------------------------------------
+Intervalo 7:
+    Hora: {data['day']['1']['hour'][7]['interval']}
+Vientos:
+    Velocidad: {data['day']['1']['hour'][7]['wind']['speed']}km/h
+    Direccion: {data['day']['1']['hour'][7]['wind']['dir']}
+Lluvia: {data['day']['1']['hour'][7]['rain']}. (Si es 0, no llueve. Si es 1, llueve.)
+Humedad: {data['day']['1']['hour'][7]['humidity']}%
+Nubes: {data['day']['1']['hour'][7]['clouds']}
+Indice UV: {data['day']['1']['hour'][7]['uv_index']}
 """
 
+print(data['day']['1']['hour'][0]['wind']['speed'])
 
 print(info)
