@@ -48,13 +48,13 @@ data = response.json()
 # print(data['day']['1'])
 
 info = f"""
-Buen día pa!
-Información General:
-Día: {data['day']['1']['name']}
-Temp. Mín: {data['day']['1']['tempmin']}°C
-Temp. Máx: {data['day']['1']['tempmax']}°C
+Buen dia pa!
+Informacion General:
+Dia: {data['day']['1']['name']}
+Temp. Min: {data['day']['1']['tempmin']} grados
+Temp. Max: {data['day']['1']['tempmax']} grados
 Alba: {data['day']['1']['sun']['in']} hs
-Crepúsculo: {data['day']['1']['sun']['out']} hs
+Crepusculo: {data['day']['1']['sun']['out']} hs
 ----------------------------------------------------
 Intervalo 1:
     Hora: {data['day']['1']['hour'][0]['interval']}
@@ -136,6 +136,12 @@ Humedad: {data['day']['1']['hour'][7]['humidity']}%
 Nubes: {data['day']['1']['hour'][7]['clouds']}
 Indice UV: {data['day']['1']['hour'][7]['uv_index']}
 """
+
+with smtplib.SMTP("smtp.gmail.com") as connection:
+    connection.starttls()
+    connection.login(user=gmail_email, password=password_app_g)
+    connection.sendmail(from_addr=gmail_email,
+    to_addrs=destiny, msg=f"Subject:Clima\n\n{info}")
 
 print(data['day']['1']['hour'][0]['wind']['speed'])
 
