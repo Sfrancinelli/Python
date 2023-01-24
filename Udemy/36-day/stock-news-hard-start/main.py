@@ -1,5 +1,6 @@
 import requests
 from api_key import trading_api, news_api
+from datetime import datetime, timedelta
 
 STOCK = "TSLA"
 COMPANY_NAME = "Tesla Inc"
@@ -13,11 +14,46 @@ NEWS_ENDPOINT = "https://newsapi.org/v2/everything"
 #HINT 1: Get the closing price for yesterday and the day before yesterday. Find the positive difference between the two prices. e.g. 40 - 20 = -20, but the positive difference is 20.
 #HINT 2: Work out the value of 5% of yerstday's closing stock price. 
 
+time_now = datetime.now()
+date_now = time_now.date()
+print(date_now)
+
+yesterday = datetime.today() - timedelta(days=1)
+yesterday_date = str(yesterday.date())
+print(yesterday_date)
+
+friday = datetime.today() - timedelta(days=4)
+friday_date = str(friday.date())
+print(friday_date)
+
 response = requests.get(STOCK_ENDPOINT, params={
     "symbol" : STOCK,
     "function" : "TIME_SERIES_DAILY_ADJUSTED",
     "apikey" : trading_api
 })
+
+response.raise_for_status()
+
+data = response.json()
+
+print(data['Time Series (Daily)']['2023-01-23']['4. close'])
+
+first_value = float(data['Time Series (Daily)'][friday_date]['4. close'])
+print(first_value)
+
+later_value = float(data['Time Series (Daily)'][yesterday_date]['4. close'])
+print(later_value)
+
+percent_change = (later_value - first_value) / first_value * 100
+
+if percent_change > 5:
+    print("Get News")
+elif percent_change < -5:
+    print("-Get News")
+else:
+    print("Value hasn't changed by 5%")
+
+
 
 ## STEP 2: Use https://newsapi.org/docs/endpoints/everything
 # Instead of printing ("Get News"), actually fetch the first 3 articles for the COMPANY_NAME. 
