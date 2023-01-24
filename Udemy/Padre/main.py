@@ -1,6 +1,7 @@
 import requests
 import smtplib
 import os
+import datetime
 # from api_key import API_KEY, AUTH_TOKEN
 
 # api_key = API_KEY
@@ -46,6 +47,27 @@ response.raise_for_status()
 data = response.json()
 
 # print(data['day']['1'])
+
+endpoint = "https://www.worldtides.info/api"
+tides_key = os.environ['TIDES_KEY']
+lat = -36.506100
+lon = -56.693779
+
+respuesta = requests.get(endpoint, params={
+    "key" : tides_key,
+    "lat" : lat,
+    "lon" : lon,
+    "heights" : True
+})
+
+tide_data = respuesta.json()
+
+tides = tide_data['heights']
+
+for tide in tides:
+    height = tide['height']
+    date = datetime.datetime.fromtimestamp(tide['date'])
+    print(f"Tide height {height} at: {date}")
 
 info = f"""
 Buen dia pa!
@@ -137,12 +159,12 @@ Nubes: {data['day']['1']['hour'][7]['clouds']}
 Indice UV: {data['day']['1']['hour'][7]['uv_index']}
 """
 
-with smtplib.SMTP("smtp.gmail.com") as connection:
-    connection.starttls()
-    connection.login(user=gmail_email, password=password_app_g)
-    connection.sendmail(from_addr=gmail_email,
-    to_addrs=destiny, msg=f"Subject:Clima\n\n{info}")
+# with smtplib.SMTP("smtp.gmail.com") as connection:
+#     connection.starttls()
+#     connection.login(user=gmail_email, password=password_app_g)
+#     connection.sendmail(from_addr=gmail_email,
+#     to_addrs=destiny, msg=f"Subject:Clima\n\n{info}")
 
-print(data['day']['1']['hour'][0]['wind']['speed'])
+# print(data['day']['1']['hour'][0]['wind']['speed'])
 
-print(info)
+# print(info)
