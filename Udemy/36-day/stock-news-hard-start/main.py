@@ -68,11 +68,11 @@ news_response.raise_for_status()
 news_data = news_response.json()
 
 print(news_data['articles'][0]['title'])
-print(news_data['articles'][0]['content'])
+print(news_data['articles'][0]['description'])
 print(news_data['articles'][1]['title'])
-print(news_data['articles'][1]['content'])
+print(news_data['articles'][1]['description'])
 print(news_data['articles'][2]['title'])
-print(f"{news_data['articles'][2]['content'][:200]}.")
+print(news_data['articles'][2]['description'])
 
 
 
