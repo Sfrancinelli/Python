@@ -53,6 +53,29 @@ elif percent_change < -5:
 else:
     print("Value hasn't changed by 5%")
 
+news_parameters = {
+    "apiKey" : news_api,
+    "q" : COMPANY_NAME,
+    "from" : yesterday_date,
+    "sortBy" : "relevancy",
+    "pageSize" : 3
+}
+
+news_response = requests.get(NEWS_ENDPOINT, params=news_parameters)
+
+news_response.raise_for_status()
+
+news_data = news_response.json()
+
+print(news_data['articles'][0]['title'])
+print(news_data['articles'][0]['content'])
+print(news_data['articles'][1]['title'])
+print(news_data['articles'][1]['content'])
+print(news_data['articles'][2]['title'])
+print(f"{news_data['articles'][2]['content'][:200]}.")
+
+
+
 
 
 ## STEP 2: Use https://newsapi.org/docs/endpoints/everything
