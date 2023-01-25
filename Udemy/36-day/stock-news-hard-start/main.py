@@ -1,6 +1,7 @@
 import requests
-from api_key import trading_api, news_api
+from api_key import trading_api, news_api, ACCOUNT_SID, AUTH_TOKEN
 from datetime import datetime, timedelta
+from twilio.rest import Client
 
 STOCK = "TSLA"
 COMPANY_NAME = "Tesla Inc"
@@ -22,9 +23,9 @@ yesterday = datetime.today() - timedelta(days=1)
 yesterday_date = str(yesterday.date())
 print(yesterday_date)
 
-friday = datetime.today() - timedelta(days=4)
-friday_date = str(friday.date())
-print(friday_date)
+day_after = datetime.today() - timedelta(days=2)
+after_date = str(day_after.date())
+print(after_date)
 
 response = requests.get(STOCK_ENDPOINT, params={
     "symbol" : STOCK,
@@ -36,9 +37,7 @@ response.raise_for_status()
 
 data = response.json()
 
-print(data['Time Series (Daily)']['2023-01-23']['4. close'])
-
-first_value = float(data['Time Series (Daily)'][friday_date]['4. close'])
+first_value = float(data['Time Series (Daily)'][after_date]['4. close'])
 print(first_value)
 
 later_value = float(data['Time Series (Daily)'][yesterday_date]['4. close'])
@@ -46,12 +45,19 @@ print(later_value)
 
 percent_change = (later_value - first_value) / first_value * 100
 
+up_down = None
+
 if percent_change > 5:
     print("Get News")
 elif percent_change < -5:
     print("-Get News")
 else:
     print("Value hasn't changed by 5%")
+
+if percent_change > 0:
+    up_down = '⬆️'
+else:
+    up_down = '⬇️'
 
 news_parameters = {
     "apiKey" : news_api,
@@ -74,21 +80,31 @@ print(news_data['articles'][1]['description'])
 print(news_data['articles'][2]['title'])
 print(news_data['articles'][2]['description'])
 
+three_articles = news_data['articles'][:3]
+print(three_articles)
 
+# [new_item for item in list]
 
-
+formatted_article = [f"TSLA: {up_down}{round(percent_change)}\nHeadline: {article['title']}. \nBrief: {article['description']}" for article in three_articles]
 
 ## STEP 2: Use https://newsapi.org/docs/endpoints/everything
 # Instead of printing ("Get News"), actually fetch the first 3 articles for the COMPANY_NAME. 
 #HINT 1: Think about using the Python Slice Operator
 
-
-
 ## STEP 3: Use twilio.com/docs/sms/quickstart/python
 # Send a separate message with each article's title and description to your phone number. 
 #HINT 1: Consider using a List Comprehension.
 
+client = Client(ACCOUNT_SID, AUTH_TOKEN)
 
+for article in formatted_article:
+    message = client.messages.create(
+        body=article,
+        from_='+16018846323', 
+        to="+54 11 3704 2581"
+    )
+
+    print(message.status)
 
 #Optional: Format the SMS message like this: 
 """
