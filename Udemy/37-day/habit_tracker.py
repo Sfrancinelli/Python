@@ -1,5 +1,6 @@
 from user_creation import pixela_endpoint, mi_endpoint, USER, TOKEN
 import requests
+from datetime import datetime
 
 GRAPH_ID = "graph1"
 
@@ -19,9 +20,14 @@ headers = {
     "X-USER-TOKEN" : TOKEN
 }
 
+time_now = datetime.now()
+print(time_now.strftime("%Y%m%d"))
+
+yesterday = datetime(year=2023, month=1, day=25)
+
 graph_values = {
-    "date" : "20230126",
-    "quantity" : "10"
+    "date" : yesterday.strftime("%Y%m%d"),
+    "quantity" : "17.4"
 }
 
 # response = requests.post(url=graph_endpoint, json=graph_config, headers=headers)
