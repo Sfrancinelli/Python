@@ -21,13 +21,13 @@ headers = {
 }
 
 time_now = datetime.now()
-print(time_now.strftime("%Y%m%d"))
+today = time_now.strftime("%Y%m%d")
 
 yesterday = datetime(year=2023, month=1, day=25)
 
 graph_values = {
-    "date" : yesterday.strftime("%Y%m%d"),
-    "quantity" : "17.4"
+    "date" : today,
+    "quantity" : input("How many kilometers did you walk today?: ")
 }
 
 # Create a Graph in pxela
@@ -36,9 +36,9 @@ graph_values = {
 # print(response.text)
 
 # Add information to the pixela graph
-# response = requests.post(url=graph_adding_end, json=graph_values, headers=headers)
+response = requests.post(url=graph_adding_end, json=graph_values, headers=headers)
 
-# print(response.text)
+print(response.text)
 
 modify_endpoint = f'{pixela_endpoint}/{USER}/graphs/{GRAPH_ID}/{yesterday.strftime("%Y%m%d")}'
 
@@ -54,8 +54,8 @@ modify_json = {
 delete_endpoint = f"{pixela_endpoint}/{USER}/graphs/{GRAPH_ID}/{yesterday.strftime('%Y%m%d')}"
 
 # Delete a pixel in a pixela graph
-response = requests.delete(url=delete_endpoint, headers=headers)
-print(response.text)
+# response = requests.delete(url=delete_endpoint, headers=headers)
+# print(response.text)
 
 
 
