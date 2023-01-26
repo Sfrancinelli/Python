@@ -32,3 +32,5 @@ response = requests.post(url=excercise_endpoint, json=params, headers=header)
 response.raise_for_status()
 data = response.json()
 print(data)
+
+SPREADSHEET_ENDPOINT = api_keys.SHEET_ENDPOINT
