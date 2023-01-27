@@ -65,3 +65,4 @@ for exercise in data['exercises']:
     sheet_response = requests.post(url=SPREADSHEET_ENDPOINT, json=sheet_inputs)
 
     print(sheet_response.text)
+    
