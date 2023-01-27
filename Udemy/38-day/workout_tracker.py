@@ -38,13 +38,30 @@ print(data)
 SPREADSHEET_ENDPOINT = api_keys.SHEET_ENDPOINT
 
 time_now = datetime.datetime.now()
-print(time_now.strftime("%d/%m/%Y")) # Ej: 26/01/2023
+today = time_now.strftime("%d/%m/%Y") # Ej: 26/01/2023
 
-try: 
-    print(data['excercises'][0])
-except:
-    print("could not print value 0")
-try:
-    print(data['exercises'][1])
-except:
-    print("could not print value 1")
+time = time_now.strftime("%X")
+print(time)
+
+# exercise = data['exercises'][0]['user_input'].title()
+# print(exercise)
+# duration = data['exercises'][0]['duration_min']
+# print(duration)
+# calories = data['exercises'][0]['nf_calories']
+# print(calories)
+
+for exercise in data['exercises']:
+    sheet_inputs = {
+        "workout" : {
+            "date" : today,
+            "time" : time,
+            "exercise" : exercise['name'].title(),
+            "duration" : exercise['duration_min'],
+            "calories" : exercise['nf_calories']
+        }
+    }
+
+
+    sheet_response = requests.post(url=SPREADSHEET_ENDPOINT, json=sheet_inputs)
+
+    print(sheet_response.text)
