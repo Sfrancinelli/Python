@@ -3,6 +3,7 @@
 import api_keys
 import requests
 import datetime
+from requests.auth import HTTPBasicAuth
 
 GENDER ="MALE"
 WEIGHT_KG = "75.5"
@@ -50,6 +51,10 @@ print(time)
 # calories = data['exercises'][0]['nf_calories']
 # print(calories)
 
+auth_str = api_keys.AUTH
+
+headers = {'Authorization' : auth_str}
+
 for exercise in data['exercises']:
     sheet_inputs = {
         "workout" : {
@@ -62,7 +67,6 @@ for exercise in data['exercises']:
     }
 
 
-    sheet_response = requests.post(url=SPREADSHEET_ENDPOINT, json=sheet_inputs)
+    sheet_response = requests.post(url=SPREADSHEET_ENDPOINT, json=sheet_inputs, headers=headers)
 
     print(sheet_response.text)
-    
