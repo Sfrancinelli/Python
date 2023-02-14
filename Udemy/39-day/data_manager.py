@@ -13,7 +13,7 @@ class DataManager:
         sheet_response = requests.get(url=self.SHEET_ENDPOINT, headers=headers)
         sheet_response.raise_for_status()
         sheet_data = sheet_response.json()
-        return sheet_data
+        return sheet_data['prices']
 
 if __name__ == "__main__":
     data_manager = DataManager()

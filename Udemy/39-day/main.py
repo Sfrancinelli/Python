@@ -6,12 +6,16 @@ data_manager = DataManager()
 sheet_data = data_manager.get_data()
 pprint(sheet_data)
 
-print(sheet_data['prices'][0]['city'])
+print(sheet_data[0]['city'])
 
 count = 0
 
-for code in sheet_data['prices'][count]['iataCode']:
-    if code == '':
-        flight_search = FlightSearch(sheet_data['prices'][count]['city'])
-        iata_code = flight_search.get_iata_code()
-        pass
+for _ in sheet_data:
+    if sheet_data[count]['iataCode'] == '':
+        city = sheet_data[count]['city']
+        flight_search = FlightSearch(city)
+        iata_code = flight_search.get_iata_code(city)
+        print(city)
+        print(iata_code)
+    count += 1
+
