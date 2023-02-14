@@ -15,7 +15,12 @@ for _ in sheet_data:
         city = sheet_data[count]['city']
         flight_search = FlightSearch(city)
         iata_code = flight_search.get_iata_code(city)
-        print(city)
-        print(iata_code)
+        # print(city)
+        # print(iata_code)
+        sheet_data[count]['iataCode'] = iata_code
+        # print(city)
+        # print(sheet_data[count]['iataCode'])
     count += 1
+
+pprint(sheet_data)
 
