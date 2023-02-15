@@ -14,7 +14,7 @@ class FlightSearch:
         if city != '':
             headers = {"apikey" : self.API_KEY}
             params = {"term" : city, "location_types" : "city"}
-            response = requests.get(url=f"{self.API_END}/locations/query", headers=headers, params=params)
+            response = requests.get(url=f"{self.API_END}locations/query", headers=headers, params=params)
             if response.status_code == 200:
                 iata_code = response.json()["locations"][0]["code"]
                 print(f"The IATA code for {city} is {iata_code}")
