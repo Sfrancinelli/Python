@@ -24,7 +24,7 @@ class DataManager:
                     "iataCode": city["iataCode"]
                 }
             }
-            response = requests.put(url=f"https://api.sheety.co/1521b556dbdfd3bfaf162649977a91c2/flightDeals/prices/{city['id']}", headers=self.HEADERS, json=new_data)
+            response = requests.put(url=f"https://api.sheety.co/ae3f72ea4b144b074aefb4c47de6eff8/flightDeals/prices/{city['id']}", headers=self.HEADERS, json=new_data)
             response.raise_for_status()
             print(f"Row {city['id']} updated successfully!")
 

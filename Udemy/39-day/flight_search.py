@@ -18,6 +18,7 @@ class FlightSearch:
             if response.status_code == 200:
                 iata_code = response.json()["locations"][0]["code"]
                 print(f"The IATA code for {city} is {iata_code}")
+                return iata_code
             else:
                 print(f"Error: {response.status_code} - {response.text}")
             # self.iataCode = "TESTING"
