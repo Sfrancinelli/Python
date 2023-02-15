@@ -20,7 +20,8 @@ for _ in sheet_data:
         sheet_data[count]['iataCode'] = iata_code
         # print(city)
         # print(sheet_data[count]['iataCode'])
+        pprint(sheet_data)
     count += 1
 
-pprint(sheet_data)
+data_manager.edit_data()
 

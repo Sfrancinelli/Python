@@ -8,22 +8,25 @@ class DataManager:
         self.SHEET_ENDPOINT = api_keys.SHEET_ENDPOINT
         self.AUTH_STR = api_keys.AUTH
         self.HEADERS = {'Authorization' : self.AUTH_STR}
+        self.destination_data = {}
 
     def get_data(self):
         sheet_response = requests.get(url=self.SHEET_ENDPOINT, headers=self.HEADERS)
         sheet_response.raise_for_status()
         sheet_data = sheet_response.json()
-        return sheet_data['prices']
+        self.destination_data = sheet_data['prices']
+        return self.destination_data
     
-    def edit_data(self, row, column, value):
-        data = {
-            "prices" : {
-            column : value
+    def edit_data(self):
+        for city in self.destination_data:
+            new_data = {
+                "price": {
+                    "iataCode": city["iataCode"]
+                }
             }
-        }
-        response = requests.put(url=f"{self.SHEET_ENDPOINT}/{row}", headers=self.HEADERS, json=data)
-        response.raise_for_status()
-        print(f"Row {row} updated successfully!")
+            response = requests.put(url=f"https://api.sheety.co/1521b556dbdfd3bfaf162649977a91c2/flightDeals/prices/{city['id']}", headers=self.HEADERS, json=new_data)
+            response.raise_for_status()
+            print(f"Row {city['id']} updated successfully!")
 
 if __name__ == "__main__":
     data_manager = DataManager()
