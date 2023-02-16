@@ -3,7 +3,7 @@ import api_keys
 import requests
 
 class DataManager:
-    #This class is responsible for talking to the Google Sheet.
+    """This class is responsible for talking to the Google Sheet"""
     def __init__(self):
         self.SHEET_ENDPOINT = api_keys.SHEET_ENDPOINT
         self.AUTH_STR = api_keys.AUTH
@@ -11,6 +11,7 @@ class DataManager:
         self.destination_data = {}
 
     def get_data(self):
+        """This function gets the information of the Google Sheet and returns it on a list"""
         sheet_response = requests.get(url=self.SHEET_ENDPOINT, headers=self.HEADERS)
         sheet_response.raise_for_status()
         sheet_data = sheet_response.json()
@@ -18,6 +19,7 @@ class DataManager:
         return self.destination_data
     
     def edit_data(self):
+        """This function gets the updated IATA Codes from the destination data list and passes it to the Google Sheet via PUT request"""
         for city in self.destination_data:
             new_data = {
                 "price": {

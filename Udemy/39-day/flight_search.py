@@ -7,6 +7,7 @@ from flight_data import FlightData
 class FlightSearch:
     #This class is responsible for talking to the Flight Search API.
     def __init__(self, city):
+        """This class is responsible for talking to the Flight Search API"""
         self.city = city
         self.iataCode = None
         self.API_KEY = api_keys.API_KEY
@@ -14,6 +15,7 @@ class FlightSearch:
         self.flights = []
 
     def get_iata_code(self, city):
+        """Gets the IATA Code of the city given by parameter via the Flight Search API and returns it as a string"""
         if city != '':
             headers = {"apikey" : self.API_KEY}
             params = {"term" : city, "location_types" : "city"}
@@ -28,6 +30,9 @@ class FlightSearch:
             # return self.iataCode
 
     def search_flight(self, destination_city):
+        """Requires a destination city IATA Code to work. 
+        It searchs the lowest price flight available from tomorrow to six month and it checks for 7 to 28 nights in destination and the flight back.
+        It's calculated in GBP currency"""
 
         tomorrow = datetime.now() + timedelta(hours=24)
 
