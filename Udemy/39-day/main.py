@@ -26,3 +26,10 @@ pprint(sheet_data[0]['city'])
 pprint(sheet_data)
 data_manager.edit_data()
 
+flight_search = FlightSearch(sheet_data[0]['city'])
+
+flights = flight_search.search_flight(sheet_data)
+
+print(flights)
+
+
