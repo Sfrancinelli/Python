@@ -44,7 +44,8 @@ class FlightSearch:
                 "nights_in_dst_from" : 7,
                 "nights_in_dst_to" : 28,
                 "flight_type" : "round",
-                "curr" : "GBP"
+                "curr" : "GBP",
+                "limit" : 50
             }
 
             count += 1
