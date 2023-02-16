@@ -39,8 +39,8 @@ class FlightSearch:
             params = {
                 "fly_from" : "LON",
                 "fly_to" : data[count]['iataCode'],
-                "date_from" : tomorrow.strftime("%d%m%Y"),
-                "date_to" : six_months.strftime("%d%m%Y"),
+                "date_from" : tomorrow.strftime("%d/%m/%Y"),
+                "date_to" : six_months.strftime("%d/%m/%Y"),
                 "nights_in_dst_from" : 7,
                 "nights_in_dst_to" : 28,
                 "flight_type" : "round",
