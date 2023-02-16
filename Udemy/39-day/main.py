@@ -30,7 +30,9 @@ flight_search = FlightSearch(sheet_data[0]['city'])
 
 flights = flight_search.search_flight(sheet_data)
 
-print(flights[0]['price'])
+pprint(flights)
+print("-------------------------------------------------")
+print(flights[0]['data'][0]['price'])
 
 
 
