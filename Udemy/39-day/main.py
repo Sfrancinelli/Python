@@ -28,11 +28,10 @@ sheet_data = data_manager.get_data()
 
 flight_search = FlightSearch(sheet_data[0]['city'])
 
-flights = flight_search.search_flight(sheet_data)
+for destination in sheet_data:
+    flights = flight_search.search_flight(destination['iataCode'])
 
-pprint(flights)
-print("-------------------------------------------------")
-print(flights[0]['data'][0]['price'])
+    print("---------------------------------")
 
 
 
