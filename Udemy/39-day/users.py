@@ -11,3 +11,7 @@ sheet_response = requests.get(url=USERS_ENDPOINT, headers=headers)
 sheet_response.raise_for_status()
 sheet_data = sheet_response.json()
 pprint(sheet_data['users'][0])
+
+# First Name Row = sheet_data['users'][0]['firstName']
+# Last Name Row = sheet_data['users'][0]['lastName']
+# Email Row = sheet_data['users'][0]['email']
