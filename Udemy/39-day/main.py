@@ -37,11 +37,15 @@ flight_search = FlightSearch(sheet_data[0]['city'])
 for destination in sheet_data:
     flights = flight_search.search_flight(destination['iataCode'])
     notification = NotificationManager()
-    try:
-        if flights.price < destination['lowestPrice']:
-            notification.send_notification(price=flights.price, origin_city=flights.origin_city, origin_airport= flights.origin_airport, destination_city=flights.destination_city, destination_airport=flights.destination_airport, out_date=flights.out_date, return_date=flights.return_date)
-    except AttributeError:
+    if flights is None:
         continue
+
+    if flights.price < destination['lowestPrice']:
+        notification.send_notification(price=flights.price, origin_city=flights.origin_city, origin_airport= flights.origin_airport, destination_city=flights.destination_city, destination_airport=flights.destination_airport, out_date=flights.out_date, return_date=flights.return_date)
+
+    if flights.stop_overs > 0:
+        notification.send_notification(price=flights.price, origin_city=flights.origin_city, origin_airport= flights.origin_airport, destination_city=flights.destination_city, destination_airport=flights.destination_airport, out_date=flights.out_date, return_date=flights.return_date, stop_overs=flights.stop_overs, via_city=flights.via_city)
+        
     print("---------------------------------")
 
 
