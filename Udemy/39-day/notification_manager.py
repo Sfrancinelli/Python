@@ -50,7 +50,7 @@ class NotificationManager:
 
             for user in sheet_data['users']:
                 
-                print(user['email'])
+                # print(user['email'])
                 email_receiver = user['email']
 
                 connection.starttls()
