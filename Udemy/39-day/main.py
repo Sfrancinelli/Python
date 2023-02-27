@@ -45,7 +45,11 @@ for destination in sheet_data:
 
     if flights.stop_overs > 0:
         notification.send_notification(price=flights.price, origin_city=flights.origin_city, origin_airport= flights.origin_airport, destination_city=flights.destination_city, destination_airport=flights.destination_airport, out_date=flights.out_date, return_date=flights.return_date, stop_overs=flights.stop_overs, via_city=flights.via_city)
-        
+
+    link = f"https://www.google.co.uk/flights?hl=en#flt={flights.origin_airport}.{flights.destination_airport}.{flights.out_date}*{flights.destination_airport}.{flights.origin_airport}.{flights.return_date}"
+
+    notification.send_email(price=flights.price, origin_city=flights.origin_city, origin_airport= flights.origin_airport, destination_city=flights.destination_city, destination_airport=flights.destination_airport, out_date=flights.out_date, return_date=flights.return_date, flight_link=link)
+
     print("---------------------------------")
 
 

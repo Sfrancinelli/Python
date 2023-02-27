@@ -11,6 +11,8 @@ HEADERS = {'Authorization' : AUTH}
 # sheet_response.raise_for_status()
 # sheet_data = sheet_response.json()
 # pprint(sheet_data['users'][0])
+# for user in sheet_data['users']:
+#     print(user['email'])
 
 # First Name Column = sheet_data['users'][0]['firstName']
 # Last Name Column = sheet_data['users'][0]['lastName']
